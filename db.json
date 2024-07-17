@@ -1,4 +1,13 @@
 {
-  "players": [],
+  "players": [
+    {
+      "id": "434b",
+      "name": "Pierre"
+    },
+    {
+      "id": "d4d5",
+      "name": "Igor"
+    }
+  ],
   "goalKeepers": []
 }
