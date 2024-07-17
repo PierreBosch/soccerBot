@@ -1,0 +1,27 @@
+{
+  "name": "wpp-connect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "serve": "nodemon dist/index.js",
+    "dev": "concurrently \"npm run watch\" \"npm run serve\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@wppconnect-team/wppconnect": "^1.32.3",
+    "axios": "^1.7.2",
+    "json-server": "^1.0.0-beta.1",
+    "sharp": "^0.33.4"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.5.3"
+  }
+}
