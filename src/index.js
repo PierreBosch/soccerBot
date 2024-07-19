@@ -2,39 +2,9 @@
 
 const wppconnect = require('@wppconnect-team/wppconnect');
 const axios = require('axios');
-
-const funnyPhrases = [
-    "{nome}, você não vem? Agora vai ficar mais fácil ganhar!",
-    "Nem sabia que você tinha se aposentado, {nome}.",
-    "Tirou o nome, {nome}? Vai estudar pra virar técnico?",
-    "Desistiu, {nome}? Quem vai fazer nossos gols contra agora?",
-    "Poxa, {nome}, já ia pegar a pipoca pra assistir suas jogadas!",
-    "Sem você, {nome}, o campo até parece maior!",
-    "Finalmente uma chance de a gente ganhar de goleada sem você, {nome}!",
-    "Senti falta das suas cambalhotas ao invés de gols, {nome}.",
-    "Não vai vir, {nome}? Então quem vai errar os pênaltis?",
-    "Vai deixar o craque de lado, {nome}? Boa sorte no xadrez!",
-    "Desistiu, {nome}? Já estávamos prontos para a sessão comédia!",
-    "Sem você, {nome}, até as bolas vão parar de rir!",
-    "Vou sentir falta das suas danças depois dos gols... contra, {nome}.",
-    "E quem vai ser o nosso saco de pancadas, {nome}?",
-    "Se não vai jogar, {nome}, pelo menos traga a pipoca!",
-    "Já estava com saudade das suas piruetas, {nome}!",
-    "Vou sentir falta das suas quedas dramáticas, {nome}.",
-    "Sem você, {nome}, vamos precisar de outro palhaço em campo.",
-    "Quem vai fazer a torcida adversária rir agora, {nome}?",
-    "Tirou o nome, {nome}? A gente precisa de alguém pra testar o goleiro!",
-    "Você era o nosso melhor espantalho de gramado, {nome}.",
-    "E quem vai ser nosso 'cai-cai' oficial, {nome}?",
-    "Espero que a sua ausência faça a diferença... pro bem, {nome}!",
-    "Sem você, {nome}, finalmente vamos ter um jogo sério.",
-    "Vou sentir falta de ter a quem culpar pelas derrotas, {nome}.",
-    "Você não era o craque, {nome}, mas era a piada.",
-    "Quem vai enfeitar o banco de reservas agora, {nome}?",
-    "Você sempre foi nosso mestre em 'dribles'... nos próprios pés, {nome}.",
-    "Vou sentir falta das suas estratégias de distração, {nome}.",
-    "Sem você, {nome}, até o juiz vai ter menos trabalho!"
-  ];
+const funnyPhrasesOnLeave = require('./sentences/funny-on-leave')
+const funnyPhrasesOnAdd = require('./sentences/funny-on-add')
+const funnyPhrasesOnAddGK = require('./sentences/funny-on-add-gk')
 
 wppconnect
     .create({
@@ -167,11 +137,11 @@ function getTemplateGoalKeeper() {
     return template
 }
 
-function getRandomFunPhrase(name) {
-    const randomId = Math.floor(Math.random() * funnyPhrases.length);
-    const phrase = funnyPhrases[randomId];
+function getRandomFunPhrase(sentences, name) {
+    const randomId = Math.floor(Math.random() * sentences.length);
+    const phrase = sentences[randomId];
     return phrase.replace(/{nome}/g, name);
-  }
+}
   
 
 function getAvailableCommandsTemplate() {
@@ -202,9 +172,11 @@ function getAvailableCommandsTemplate() {
     return template
 }
 
-function extractFirstAndLastName(fullName) {
+function extractFirstAndLastName(fullName, onlyFirstName = false) {
     // Split the full name into words
     const words = fullName.trim().split(/\s+/);
+
+    if(onlyFirstName) return words[0]
 
     // If there are at least two words, return the first two
     if (words.length >= 2) {
@@ -239,17 +211,22 @@ function start(client) {
             }
 
             if(message.body.toLowerCase().includes("/limpar")) {
-                try {
-                    await resetSoccerList();
-
+                if(message.sender.id === "554896742125@c.us") {
+                    try {
+                        await resetSoccerList();
+    
+                        client
+                        .sendText(message.from, 'Lista resetada')
+                        .then((result) => {
+    
+                        })
+                    } catch (error) {
+                        console.log(error)
+                    }
+                } else {
                     client
-                    .sendText(message.from, 'Lista resetada')
-                    .then((result) => {
-
-                    })
-
-                } catch (error) {
-                    console.log(error)
+                    .sendText(message.from,'To de 👀 no senhor! Somente o administrador pode resetar a lista')
+                    .then((result) => {})
                 }
             }
 
@@ -271,6 +248,14 @@ function start(client) {
                         client
                         .sendText(message.from, template)
                         .then((result) => { console.log('Player added')})
+
+                        setTimeout(() => {
+                            client
+                            .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnAdd, extractFirstAndLastName(message.sender.pushname, true)))
+                            .then((result) => {
+
+                            })
+                        }, 300)
                     } else {
                         client
                         .sendText(message.from, `A lista com 16 jogadores já está completa, não é possível adicionar`)
@@ -302,7 +287,7 @@ function start(client) {
 
                    setTimeout(() => {
                     client
-                    .sendText(message.from, getRandomFunPhrase(message.sender.pushname))
+                    .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnLeave, extractFirstAndLastName(message.sender.pushname, true)))
                     .then((result) => {
 
                     })
@@ -330,6 +315,14 @@ function start(client) {
                         client
                         .sendText(message.from, template)
                         .then((result) => { console.log('Goal Keeper added')})
+
+                        setTimeout(() => {
+                            client
+                            .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnAddGK, extractFirstAndLastName(message.sender.pushname, true)))
+                            .then((result) => {
+
+                            })
+                        }, 300)
                     }else {
                         client
                         .sendText(message.from, `A lista com 2 goleiros já está completa, não é possível adicionar`)
