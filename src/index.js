@@ -5,6 +5,11 @@ const axios = require('axios');
 const funnyPhrasesOnLeave = require('./sentences/funny-on-leave')
 const funnyPhrasesOnAdd = require('./sentences/funny-on-add')
 const funnyPhrasesOnAddGK = require('./sentences/funny-on-add-gk')
+const funnyPhrasesOnReset = require('./sentences/funny-on-reset')
+const funnyPhrasesOnFoodMenu = require('./sentences/funny-on-food-menu');
+const funnyOnFoodMenu = require('./sentences/funny-on-food-menu');
+
+const ADMIN_WHATSAPP_ID = "554896742125@c.us"
 
 wppconnect
     .create({
@@ -38,7 +43,6 @@ async function getPlayers() {
 
     return response.data
 }
-
 
 async function addGoalKeeper(name) {
     await axios.post('http://localhost:3001/goalKeepers', { name })
@@ -104,7 +108,6 @@ async function resetSoccerList() {
 }
 
 
-
 function getTemplateHeader() {
     const template = `*📢 Avisos*
 
@@ -121,7 +124,7 @@ function getTemplateHeader() {
 }
 
 function getMenuTemplate() {
-    const template = `👨🏻‍🍳 Cardápio
+    const template = `*👨🏻‍🍳 Cardápio*
 
 🥩 Churrasco
 🥖 Pão de alho 
@@ -137,7 +140,7 @@ function getTemplateGoalKeeper() {
     return template
 }
 
-function getRandomFunPhrase(sentences, name) {
+function getRandomFunPhrase(sentences, name = 'Pierre') {
     const randomId = Math.floor(Math.random() * sentences.length);
     const phrase = sentences[randomId];
     return phrase.replace(/{nome}/g, name);
@@ -173,16 +176,13 @@ function getAvailableCommandsTemplate() {
 }
 
 function extractFirstAndLastName(fullName, onlyFirstName = false) {
-    // Split the full name into words
     const words = fullName.trim().split(/\s+/);
 
     if(onlyFirstName) return words[0]
 
-    // If there are at least two words, return the first two
     if (words.length >= 2) {
         return words[0] + ' ' + words[1];
     } else {
-        // Otherwise, return the full name
         return fullName;
     }
 }
@@ -211,15 +211,14 @@ function start(client) {
             }
 
             if(message.body.toLowerCase().includes("/limpar")) {
-                if(message.sender.id === "554896742125@c.us") {
+                if(message.sender.id === ADMIN_WHATSAPP_ID) {
                     try {
                         await resetSoccerList();
     
                         client
-                        .sendText(message.from, 'Lista resetada')
-                        .then((result) => {
-    
-                        })
+                        .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnReset))
+                        .then(() => { console.log('lista_resetada')})
+
                     } catch (error) {
                         console.log(error)
                     }
@@ -378,11 +377,13 @@ function start(client) {
             }
 
             if (message.body.toLowerCase().includes("/cardapio")) {
-                client
+                client.sendText(message.from, getRandomFunPhrase(funnyOnFoodMenu))
+                
+                setTimeout(() => {
+                    client
                     .sendText(message.from, getMenuTemplate())
-                    .then((result) => {
-
-                })
+                    .then(() => { console.log('food_menu')})
+                }, 500)
                     .catch((erro) => {
                     console.error('Error when sending: ', erro); //return object error
                 });
