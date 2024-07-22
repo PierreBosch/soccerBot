@@ -13,6 +13,9 @@ const ADMIN_WHATSAPP_ID = "554896742125@c.us"
 
 wppconnect
     .create({
+    puppeteerOptions: {
+        args: ['--no-sandbox','--disable-setuid-sandbox'],
+    },
     session: 'sessionName',
     catchQR: (base64Qr, asciiQR) => {
         console.log(asciiQR); // Optional to log the QR in the terminal
