@@ -9,6 +9,7 @@
     "serve": "nodemon src/index.js"
   },
   "keywords": [],
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
