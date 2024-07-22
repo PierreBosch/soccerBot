@@ -110,7 +110,7 @@ async function resetSoccerList() {
     goalKeeperIds.forEach(async (id) => axios.delete(`http://localhost:3001/goalKeepers/${id}`))
 }
 
-//comentário
+//comentário novo
 
 function getTemplateHeader() {
     const template = `*📢 Avisos*
