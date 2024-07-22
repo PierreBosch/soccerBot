@@ -190,9 +190,53 @@ function extractFirstAndLastName(fullName, onlyFirstName = false) {
 
 function start(client) {
     client.onMessage(async (message) => {
-        // if(message.chatId === "120363144278270676@g.us"){
-             if(message.body.toLowerCase().includes("/lista")) {
+        const command = message.body.toLowerCase();
+
+        if(command.includes("/lista")) {
+            try {
+                const playersList = await getPlayers();
+                const goalKeepersList = await getGoalKeepers();
+
+                const { players, goalKeepers } = getPlayersList(playersList, goalKeepersList)
+
+                const templateText = `${getTemplateHeader().trim()}\n\n${players.trim()}`;
+                const template = goalKeepers.length > 0 ? `${templateText.trim()}\n${getTemplateGoalKeeper()}\n\n${goalKeepers.trim()}` : templateText
+
+                client
+                .sendText(message.from, template)
+                .then((result) => {})
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        if(command.includes("/limpar")) {
+            if(message.sender.id === ADMIN_WHATSAPP_ID) {
                 try {
+                    await resetSoccerList();
+
+                    client
+                    .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnReset))
+                    .then(() => { console.log('lista_resetada')})
+
+                } catch (error) {
+                    console.log(error)
+                }
+            } else {
+                client
+                .sendText(message.from,'To de 👀 no senhor! Somente o administrador pode resetar a lista')
+                .then((result) => {})
+            }
+        }
+
+        if(command.includes("/add")) {
+            try {
+                const currentPlayersList =  await getPlayers();
+
+                if(currentPlayersList.length < 16) {
+                    await addPlayer(extractFirstAndLastName(message.sender.pushname));
+                    
                     const playersList = await getPlayers();
                     const goalKeepersList = await getGoalKeepers();
 
@@ -203,76 +247,66 @@ function start(client) {
 
                     client
                     .sendText(message.from, template)
-                    .then((result) => {})
+                    .then((result) => { console.log('Player added')})
 
-                } catch (error) {
-                    console.log(error)
-                }
-            }
-
-            if(message.body.toLowerCase().includes("/limpar")) {
-                if(message.sender.id === ADMIN_WHATSAPP_ID) {
-                    try {
-                        await resetSoccerList();
-    
+                    setTimeout(() => {
                         client
-                        .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnReset))
-                        .then(() => { console.log('lista_resetada')})
+                        .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnAdd, extractFirstAndLastName(message.sender.pushname, true)))
+                        .then((result) => {
 
-                    } catch (error) {
-                        console.log(error)
-                    }
+                        })
+                    }, 300)
                 } else {
                     client
-                    .sendText(message.from,'To de 👀 no senhor! Somente o administrador pode resetar a lista')
-                    .then((result) => {})
+                    .sendText(message.from, `A lista com 16 jogadores já está completa, não é possível adicionar`)
+                    .then((result) => { console.log('Lista cheia')})
                 }
+                
+            } catch (error) {
+                console.log(error)
             }
+        }
 
-            if(message.body.toLowerCase().includes("/add")) {
-                try {
-                    const currentPlayersList =  await getPlayers();
-  
-                    if(currentPlayersList.length < 16) {
-                        await addPlayer(extractFirstAndLastName(message.sender.pushname));
-                        
-                        const playersList = await getPlayers();
-                        const goalKeepersList = await getGoalKeepers();
+        if(command.includes("/fora")) {
+            try {
+                await removePlayerOrGoalKeeper(extractFirstAndLastName(message.sender.pushname));
+                
+                const playersList = await getPlayers();
+                const goalKeepersList = await getGoalKeepers();
 
-                        const { players, goalKeepers } = getPlayersList(playersList, goalKeepersList)
+                const { players, goalKeepers } = getPlayersList(playersList, goalKeepersList)
 
-                        const templateText = `${getTemplateHeader().trim()}\n\n${players.trim()}`;
-                        const template = goalKeepers.length > 0 ? `${templateText.trim()}\n${getTemplateGoalKeeper()}\n\n${goalKeepers.trim()}` : templateText
+                const templateText = `${getTemplateHeader().trim()}\n\n${players.trim()}`;
+                const template = goalKeepers.length > 0 ? `${templateText.trim()}\n${getTemplateGoalKeeper()}\n\n${goalKeepers.trim()}` : templateText
+                
+                client
+                .sendText(message.from, template)
+                .then((result) => {
 
-                        client
-                        .sendText(message.from, template)
-                        .then((result) => { console.log('Player added')})
+                })
 
-                        setTimeout(() => {
-                            client
-                            .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnAdd, extractFirstAndLastName(message.sender.pushname, true)))
-                            .then((result) => {
+                setTimeout(() => {
+                client
+                .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnLeave, extractFirstAndLastName(message.sender.pushname, true)))
+                .then((result) => {
 
-                            })
-                        }, 300)
-                    } else {
-                        client
-                        .sendText(message.from, `A lista com 16 jogadores já está completa, não é possível adicionar`)
-                        .then((result) => { console.log('Lista cheia')})
-                    }
-                    
-                } catch (error) {
-                    console.log(error)
-                }
+                })
+                }, 300)
+            } catch (error) {
+                console.log(error)
             }
+        }
 
-            if(message.body.toLowerCase().includes("/fora")) {
-                try {
-                    await removePlayerOrGoalKeeper(extractFirstAndLastName(message.sender.pushname));
-                    
+        if(command.includes("/goleiro")) {
+            const currentGoalKeepersList =  await await getGoalKeepers();
+
+            try {
+                if(currentGoalKeepersList.length < 2) {
+                    await addGoalKeeper(extractFirstAndLastName(message.sender.pushname));
+
                     const playersList = await getPlayers();
                     const goalKeepersList = await getGoalKeepers();
-
+                    
                     const { players, goalKeepers } = getPlayersList(playersList, goalKeepersList)
 
                     const templateText = `${getTemplateHeader().trim()}\n\n${players.trim()}`;
@@ -280,136 +314,103 @@ function start(client) {
                     
                     client
                     .sendText(message.from, template)
-                    .then((result) => {
+                    .then((result) => { console.log('Goal Keeper added')})
 
-                    })
-
-                   setTimeout(() => {
-                    client
-                    .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnLeave, extractFirstAndLastName(message.sender.pushname, true)))
-                    .then((result) => {
-
-                    })
-                   }, 300)
-                } catch (error) {
-                    console.log(error)
-                }
-            }
-
-            if(message.body.toLowerCase().includes("/goleiro")) {
-                const currentGoalKeepersList =  await await getGoalKeepers();
-
-                try {
-                    if(currentGoalKeepersList.length < 2) {
-                        await addGoalKeeper(extractFirstAndLastName(message.sender.pushname));
-
-                        const playersList = await getPlayers();
-                        const goalKeepersList = await getGoalKeepers();
-                        
-                        const { players, goalKeepers } = getPlayersList(playersList, goalKeepersList)
-
-                        const templateText = `${getTemplateHeader().trim()}\n\n${players.trim()}`;
-                        const template = goalKeepers.length > 0 ? `${templateText.trim()}\n${getTemplateGoalKeeper()}\n\n${goalKeepers.trim()}` : templateText
-                        
+                    setTimeout(() => {
                         client
-                        .sendText(message.from, template)
-                        .then((result) => { console.log('Goal Keeper added')})
+                        .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnAddGK, extractFirstAndLastName(message.sender.pushname, true)))
+                        .then((result) => {
 
-                        setTimeout(() => {
-                            client
-                            .sendText(message.from, getRandomFunPhrase(funnyPhrasesOnAddGK, extractFirstAndLastName(message.sender.pushname, true)))
-                            .then((result) => {
-
-                            })
-                        }, 300)
-                    }else {
-                        client
-                        .sendText(message.from, `A lista com 2 goleiros já está completa, não é possível adicionar`)
-                        .then((result) => { console.log('Lista cheia')})
-                    }
-                } catch (error) {
-                    console.log(error)
-                }
-            }
-
-            if (message.body.toLowerCase().includes("/pix")) {
-                client
-                    .sendText(message.from, 'Chave (48) 99674-2125 (Bradesco)')
-                    .then((result) => {
-
-                })
-                    .catch((erro) => {
-                    console.error('Error when sending: ', erro); //return object error
-                });
-            }
-
-            if (message.body.toLowerCase().includes("/churrasco")) {
-                client
-                    .sendText(message.from, '💵 R$ 20,00')
-                    .then((result) => {
-       
-                })
-                    .catch((erro) => {
-                    console.error('Error when sending: ', erro); //return object error
-                });
-            }
-
-            if (message.body.toLowerCase().includes("/jogo")) {
-                client
-                    .sendText(message.from, '💵 R$ 12,00')
-                    .then((result) => {
-
-                })
-                    .catch((erro) => {
-                    console.error('Error when sending: ', erro); //return object error
-                });
-            }
-
-            if (message.body.toLowerCase().includes("/coca")) {
-                client
-                    .sendText(message.from, '💵 R$ 5,00')
-                    .then((result) => {
-
-                })
-                    .catch((erro) => {
-                    console.error('Error when sending: ', erro); //return object error
-                });
-            }
-
-            if (message.body.toLowerCase().includes("/cardapio")) {
-                client.sendText(message.from, getRandomFunPhrase(funnyOnFoodMenu))
-                
-                setTimeout(() => {
+                        })
+                    }, 300)
+                }else {
                     client
-                    .sendText(message.from, getMenuTemplate())
-                    .then(() => { console.log('food_menu')})
-                }, 500)
-                    .catch((erro) => {
-                    console.error('Error when sending: ', erro); //return object error
-                });
+                    .sendText(message.from, `A lista com 2 goleiros já está completa, não é possível adicionar`)
+                    .then((result) => { console.log('Lista cheia')})
+                }
+            } catch (error) {
+                console.log(error)
             }
+        }
 
-            if (message.body.toLowerCase().includes("/escalacao")) {
+        if (command.includes("/pix")) {
+            client
+                .sendText(message.from, 'Chave (48) 99674-2125 (Bradesco)')
+                .then((result) => {
+
+            })
+                .catch((erro) => {
+                console.error('Error when sending: ', erro); //return object error
+            });
+        }
+
+        if (command.includes("/churrasco")) {
+            client
+                .sendText(message.from, '💵 R$ 20,00')
+                .then((result) => {
+    
+            })
+                .catch((erro) => {
+                console.error('Error when sending: ', erro); //return object error
+            });
+        }
+
+        if (command.includes("/jogo")) {
+            client
+                .sendText(message.from, '💵 R$ 12,00')
+                .then((result) => {
+
+            })
+                .catch((erro) => {
+                console.error('Error when sending: ', erro); //return object error
+            });
+        }
+
+        if (command.includes("/coca")) {
+            client
+                .sendText(message.from, '💵 R$ 5,00')
+                .then((result) => {
+
+            })
+                .catch((erro) => {
+                console.error('Error when sending: ', erro); //return object error
+            });
+        }
+
+        if (command.includes("/cardapio")) {
+            client.sendText(message.from, getRandomFunPhrase(funnyOnFoodMenu))
+            
+            setTimeout(() => {
                 client
-                    .sendImage(message.from, 'https://i.ibb.co/6tDwm7G/DOIS-TIMES-NO-MESMO-CAMPO-3.png')
-                    .then((result) => {
+                .sendText(message.from, getMenuTemplate())
+                .then(() => { console.log('food_menu')})
+            }, 500)
+                .catch((erro) => {
+                console.error('Error when sending: ', erro); //return object error
+            });
+        }
 
-                })
-                    .catch((erro) => {
-                    console.error('Error when sending: ', erro); //return object error
-                });
-            }
+        if (command.includes("/escalacao")) {
+            client
+                .sendImage(message.from, 'https://i.ibb.co/6tDwm7G/DOIS-TIMES-NO-MESMO-CAMPO-3.png')
+                .then((result) => {
 
-            if (message.body.toLowerCase().includes("/ajuda")) {
-                client
-                    .sendText(message.from, getAvailableCommandsTemplate())
-                    .then((result) => {
+            })
+                .catch((erro) => {
+                console.error('Error when sending: ', erro); //return object error
+            });
+        }
 
-                })
-                    .catch((erro) => {
-                    console.error('Error when sending: ', erro); //return object error
-                });
-            }
+        if (command.includes("/ajuda")) {
+            client
+                .sendText(message.from, getAvailableCommandsTemplate())
+                .then((result) => {
+
+            })
+                .catch((erro) => {
+                console.error('Error when sending: ', erro); //return object error
+            });
+        }
     
     });
 }
