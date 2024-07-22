@@ -128,11 +128,9 @@ function getTemplateHeader() {
 }
 
 function getMenuTemplate() {
-    const template = `*👨🏻‍🍳 Cardápio*
+    const template = `*👨🏻‍🍳 Cardápio da Semana*
 
-🥩 Churrasco
-🥖 Pão de alho 
-🫘 Salame Cancelier Puro`;
+🫘🥖 Choripan`;
 
     return template
 }
