@@ -13,6 +13,7 @@ const getLineup = require('./get-lineup');
 const addBarbecueEater = require('./add-barbecue-eater');
 const deleteBarbecueEater = require('./delete-barbecue-eater');
 const getBarbecueEaters = require('./get-barbecue-eaters');
+const sendPaymentMessages = require('./send-payment-messages');
 
 const commands = ({
   '/add': addPlayer,
@@ -30,7 +31,8 @@ const commands = ({
   '/add-churras': addBarbecueEater,
   '/add-churras-coca': addBarbecueEater,
   '/fora-churras': deleteBarbecueEater,
-  '/lista-churras': getBarbecueEaters
+  '/lista-churras': getBarbecueEaters,
+  '/cobrar': sendPaymentMessages,
 })
 
 
