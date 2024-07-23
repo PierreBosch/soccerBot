@@ -4,59 +4,59 @@ function getAvailableCommandsTemplate() {
 
 *⚽ Lista do Futebol*
 
-\`\`\`\/lista\`\`\`\     
+\`\`\`/lista\`\`\`     
 _mostra lista atual de jogadores e goleiros_
 
-\`\`\`\/add\`\`\`\
+\`\`\`/add\`\`\`
 _adiciona automaticamente seu nome na lista como jogador de linha_
 
-\`\`\`\/goleiro\`\`\`\
+\`\`\`/goleiro\`\`\`
 _adiciona automaticamente seu nome na lista como goleiro_
 
-\`\`\`\/fora\`\`\`\      
+\`\`\`/fora\`\`\`      
 _retira seu nome automaticamente da lista do futebol_
 
 *🤑 Pagamentos*
 
-\`\`\`\/pix\`\`\`\       
+\`\`\`/pix\`\`\`       
 _mostra a chave pix para pagamentos_
 
-\`\`\`\/jogo\`\`\`\      
+\`\`\`/jogo\`\`\`      
 _mostra o valor a pagar do jogo_
 
-\`\`\`\/coca\`\`\`\      
+\`\`\`/coca\`\`\`      
 _mostra o valor a pagar da coca_
 
-\`\`\`\/churrasco\`\`\`\ 
+\`\`\`/churrasco\`\`\` 
 _mostra o valor a pagar do churrasco_
 
 *👨🏻‍🍳 Cardápio*
 
-\`\`\`\/cardapio\`\`\`\
+\`\`\`/cardapio\`\`\`
 _mostra o cardápio da semana_
 
 *🏃🏻 Escalação*
 
-\`\`\`\/escalacao\`\`\`\
+\`\`\`/escalacao\`\`\`
 _mostra a escalação da semana_
 
 *🥩 Lista do Churrasco*
 
-\`\`\`\/add-churras\`\`\`\
+\`\`\`/add-churras\`\`\`
 _adiciona no churrasco 🥩_
 
-\`\`\`\/add-churras-coca\`\`\`\
+\`\`\`/add-churras-coca\`\`\`
 _adiciona no churrasco 🥩 com coca 🥤_
 
-\`\`\`\/fora-churras\`\`\`\
+\`\`\`/fora-churras\`\`\`
 _retira do churrasco_
 
-\`\`\`\/lista-churras\`\`\`\
+\`\`\`/lista-churras\`\`\`
 _divulga a lista do churrasco atual_
 
 *📟 Listar comandos*
 
-\`\`\`\/ajuda\`\`\`\  _mostra os comandos disponíveis_`;
+\`\`\`/ajuda\`\`\`  _mostra os comandos disponíveis_`;
 }
 
 module.exports = getAvailableCommandsTemplate
