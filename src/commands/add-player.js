@@ -14,8 +14,8 @@ async function addPlayer(message, client) {
 
       const currentPlayersList =  await getPlayers();
 
-      if(currentPlayersList.length >= 16) {
-        await client.sendText(sender, soldOutExceptionAnswer)
+      if(currentPlayersList.length === 16) {
+        return await client.sendText(sender, soldOutExceptionAnswer)
       }
 
       await addPlayerService(getPlayerName(playerName))
