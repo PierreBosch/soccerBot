@@ -2,27 +2,38 @@
 function getAvailableCommandsTemplate() {
   return `\`\`\`*Comandos Disponíveis*
 
-/lista - mostra lista atual de jogadores e goleiros
+*Lista do Futebol*
 
-/add - adiciona automaticamente seu nome na lista como jogador de linha
+/lista - _mostra lista atual de jogadores e goleiros_
+/add - _adiciona automaticamente seu nome na lista como jogador de linha_
+/goleiro - _adiciona automaticamente seu nome na lista como goleiro_
+/fora - _retira seu nome automaticamente da lista do futebol_
 
-/goleiro - adiciona automaticamente seu nome na lista como goleiro
+*Pagamento*
 
-/fora - retira seu nome automaticamente da lista
+/pix - _mostra a chave pix para pagamentos_
+/jogo - _mostra o valor a pagar do jogo_
+/coca - _mostra o valor a pagar da coca_
+/churrasco - _mostra o valor a pagar do churrasco_
 
-/pix - mostra a chave pix para pagamentos do churrasco futebol refri
+*Cardápio*
 
-/jogo - mostra o valor a pagar do jogo
+/cardapio - _mostra o cardápio da semana_
 
-/coca - mostra o valor a pagar da coca
+*Escalação*
 
-/churrasco - mostra o valor a pagar do churrasco
+/escalacao - _mostra a escalação da semana_
 
-/cardapio - mostra o cardápio da semana
+*Lista do Churrasco*
 
-/escalacao - mostra a escalação da semana
+/add-churras _adiciona no churrasco_
+/add-churras-coca _adiciona no churrasco com coca_
+/fora-churras _retira do churrasco_
+/lista-churras _divulga a lista do churrasco_
 
-/ajuda - mostra os comandos disponíveis\`\`\``;
+*Listar comandos*
+
+/ajuda - _mostra os comandos disponíveis_\`\`\``;
 }
 
 module.exports = getAvailableCommandsTemplate
