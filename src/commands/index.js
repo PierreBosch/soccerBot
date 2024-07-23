@@ -10,6 +10,9 @@ const getMatchPrice = require('./get-match-price');
 const getCokePrice = require('./get-coke-price');
 const getAvailableCommands = require('./get-available-commands');
 const getLineup = require('./get-lineup');
+const addBarbecueEater = require('./add-barbecue-eater');
+const deleteBarbecueEater = require('./delete-barbecue-eater');
+const getBarbecueEaters = require('./get-barbecue-eaters');
 
 const commands = ({
   '/add': addPlayer,
@@ -24,6 +27,10 @@ const commands = ({
   '/jogo': getMatchPrice,
   '/ajuda': getAvailableCommands,
   '/escalacao': getLineup,
+  '/add-churras': addBarbecueEater,
+  '/add-churras-coca': addBarbecueEater,
+  '/fora-churras': deleteBarbecueEater,
+  '/lista-churras': getBarbecueEaters
 })
 
 
@@ -39,7 +46,9 @@ function start(client) {
   client.onMessage(async (message) => {
       const command = message.body.toLowerCase();
       
-      executeCommand(command, message, client)
+      if(command.startsWith('/')) {
+        executeCommand(command, message, client)
+      }
   });
 }
 
