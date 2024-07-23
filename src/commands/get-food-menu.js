@@ -8,7 +8,7 @@ async function getFoodMenu(message, client) {
   const sender = message.from;
 
   await client.sendText(sender, getFoodMenuTemplate())
-  const firstName = getPlayer(playerName, true);
+  const firstName = getPlayerName(playerName, true);
 
   await client.sendText(sender, getRandomFunSentence(funnyPhrasesOnFoodMenu, firstName))
 }
