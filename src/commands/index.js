@@ -29,11 +29,10 @@ const commands = ({
 
 function executeCommand(command, ...args) {
   const func = commands[command];
-  if (func) {
-    return func(...args);
-  } else {
-    throw new Error(`Comando ${command} não encontrado.`);
-  }
+  
+  if (!func) throw new Error(`Comando ${command} não encontrado.`);
+
+  return func(...args);
 }
 
 function start(client) {
