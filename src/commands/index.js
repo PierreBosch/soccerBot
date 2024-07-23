@@ -44,9 +44,9 @@ function executeCommand(command, ...args) {
 
 function start(client) {
   client.onMessage(async (message) => {
-      const command = message.body.toLowerCase();
+      const [command] = message.body.toLowerCase().split(' ');
       
-      if(command.startsWith('/')) {
+      if(command.trim().startsWith('/')) {
         executeCommand(command, message, client)
       }
   });
