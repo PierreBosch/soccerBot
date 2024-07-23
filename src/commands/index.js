@@ -40,8 +40,6 @@ function start(client) {
   client.onMessage(async (message) => {
       const command = message.body.toLowerCase();
       
-      if(message.from !== '554896106006@c.us') return;
-
       executeCommand(command, message, client)
   });
 }
