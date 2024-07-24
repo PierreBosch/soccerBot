@@ -4,8 +4,9 @@ const isAdmin = require('../permissions');
 
 async function deleteDebtorsList(message, client) {
   const sender = message.from;
+  const senderId = message.sender.id;
 
-  if(!isAdmin(sender)) {
+  if(!isAdmin(senderId)) {
     return await client.sendText(sender, 'Somente admins podem deletar a lista de pagantes')
   }
 

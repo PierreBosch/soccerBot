@@ -4,8 +4,7 @@ const getBarbecueEatersTemplate = require('../templates/get-barbecue-eaters-temp
 const getRandomFunSentence = require('../util/get-random-fun-sentence');
 const funnyPhrasesOnAddBarbecue = require('../sentences/funny-on-add-barbecue');
 const addBarbecueEaterService = require('../http/add-to-barbecue');
-
-const ADMIN_WHATSAPP_ID = "554896742125@c.us"
+const isAdmin = require('../permissions');
 
 async function addBarbecueEater(message, client) {
   try {
@@ -18,7 +17,7 @@ async function addBarbecueEater(message, client) {
 
       const [,barbecueEaterGuest] = message.body.split("|")
 
-      if(senderId  === ADMIN_WHATSAPP_ID && !!barbecueEaterGuest) {
+      if(isAdmin(senderId) && !!barbecueEaterGuest) {
         await addBarbecueEaterService(getPlayerName(barbecueEaterGuest), stayForCoke)
       }else {
         await addBarbecueEaterService(getPlayerName(playerName), stayForCoke)

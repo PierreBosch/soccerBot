@@ -1,8 +1,7 @@
 const deleteBarbecueEaterService = require('../http/delete-barbecue-eater');
+const isAdmin = require('../permissions');
 const getPlayerName = require('../util/extract-first-and-last-name');
 const getBarbecueEaters = require('./get-barbecue-eaters');
-
-const ADMIN_WHATSAPP_ID = "554896742125@c.us"
 
 async function deleteBarbecueEater(message, client) {
   try {
@@ -11,7 +10,7 @@ async function deleteBarbecueEater(message, client) {
 
     const [,barbecueEaterGuest] = message.body.split("|")
 
-    if(senderId === ADMIN_WHATSAPP_ID && !!barbecueEaterGuest) {
+    if(isAdmin(senderId) && !!barbecueEaterGuest) {
       await deleteBarbecueEaterService(getPlayerName(barbecueEaterGuest))
     } else {
       await deleteBarbecueEaterService(getPlayerName(playerName));

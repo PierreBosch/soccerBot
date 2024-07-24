@@ -4,13 +4,14 @@ const getPlayerName = require('../util/extract-first-and-last-name');
 const getDebtorsList = require('./get-debtors-list');
 
 async function clearDebt(message, client) {
+  const senderId = message.sender.id;
   const sender = message.from;
   const playerName = getPlayerName(message.sender.pushname)
 
   try {
     const [,debtorName] = message.body.split("|")
    
-    if(!!debtorName && isAdmin(sender)) {
+    if(!!debtorName && isAdmin(senderId)) {
       await clearDebtService(debtorName, true)
     } else {
       await clearDebtService(playerName)
