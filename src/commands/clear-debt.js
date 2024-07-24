@@ -9,9 +9,9 @@ async function clearDebt(message, client) {
 
   try {
     const [,debtorName] = message.body.split("|")
-    console.log(debtorName)
+   
     if(!!debtorName && isAdmin(sender)) {
-      await clearDebtService(debtorName)
+      await clearDebtService(debtorName, true)
     }else {
       await clearDebtService(playerName)
     }
