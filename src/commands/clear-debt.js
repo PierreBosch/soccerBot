@@ -12,7 +12,7 @@ async function clearDebt(message, client) {
    
     if(!!debtorName && isAdmin(sender)) {
       await clearDebtService(debtorName, true)
-    }else {
+    } else {
       await clearDebtService(playerName)
     }
    
