@@ -12,13 +12,11 @@ async function clearDebt(message, client) {
     console.log(debtorName)
     if(!!debtorName && isAdmin(sender)) {
       await clearDebtService(debtorName)
-      await client.sendText(sender, `${debtorName.trim()}, foi marcado como pago`)
     }else {
       await clearDebtService(playerName)
-      await client.sendText(sender, `${playerName}, foi marcado como pago`)
     }
    
-    await getDebtorsList(message,client);
+    await getDebtorsList(message,client, true);
   } catch (error) {
     await client.sendText(sender, error.message)
   }

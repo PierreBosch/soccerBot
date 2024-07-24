@@ -21,7 +21,7 @@ async function createDebtorsList(message, client) {
 
   await client.sendText(sender, 'Lista do serasa criada com sucesso!')
 
-  await getDebtorsList(message,client)
+  await getDebtorsList(message,client, true)
 }
 
 module.exports = createDebtorsList
