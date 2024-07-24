@@ -7,7 +7,9 @@ const getDebtorsList = require('./get-debtors-list');
 async function createDebtorsList(message, client) {
   const sender = message.from;
 
-  if(!isAdmin(sender)) await client.sendText(sender, 'Somente admins podem criar a lista de pagantes')
+  if(!isAdmin(sender)) {
+    return await client.sendText(sender, 'Somente admins podem criar a lista de pagantes')
+  }
 
   const players = await getPlayers();
   const barbecueEaters = await getBarbecueEaters();

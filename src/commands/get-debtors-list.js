@@ -4,7 +4,9 @@ const getDebtorsListTemplate = require("../templates/get-debtors-list-template")
 async function getDebtorsList(message, client, byPassAdmin = false) {
   const sender = message.from;
 
-  if(!isAdmin(sender) && !byPassAdmin) await client.sendText(sender, 'Somente admins mostrar a lista de pagantes')
+  if(!isAdmin(sender) && byPassAdmin)  {
+    return await client.sendText(sender, 'Somente admins mostrar a lista de pagantes')
+  }
 
   const debtorsListTemplate = await getDebtorsListTemplate();
 
