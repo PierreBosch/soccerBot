@@ -1,6 +1,56 @@
 {
-  "players": [],
+  "players": [
+    {
+      "id": "gh45c",
+      "name": "Pierre"
+    },
+    {
+      "id": "fsa32",
+      "name": "Shaiana Spader"
+    }
+  ],
+  "barbecueEaters": [
+    {
+      "id": "gh45c",
+      "name": "Pierre"
+    },
+    {
+      "id": "gh42c",
+      "name": "Arthur Biehl"
+    },
+    {
+      "id": "gh43c",
+      "name": "Peter"
+    }
+  ],
   "goalKeepers": [],
-  "barbecueEaters": [],
-  "lineupImageUrls": []
+  "billingPhones": [
+    {
+      "id": "ABCD",
+      "name": "Shaiana Spader",
+      "phone": "554896106006@c.us"
+    }
+  ],
+  "debtors": [
+    {
+      "id": "9702",
+      "name": "Pierre",
+      "paid": false
+    },
+    {
+      "id": "10e6",
+      "name": "Shaiana Spader",
+      "paid": false
+    },
+    {
+      "id": "3c04",
+      "name": "Arthur Biehl",
+      "paid": false
+    },
+    {
+      "id": "97cc",
+      "name": "Peter",
+      "paid": true
+    }
+  ]
 }
