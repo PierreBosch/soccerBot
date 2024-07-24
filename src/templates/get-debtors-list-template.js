@@ -1,7 +1,20 @@
 const getDebtorsListService = require("../http/get-debtors-list");
+const formatToBRL = require("../util/format-currency-brl");
 
 function getDebtorsList(debtors) {
-  let debtorsList = debtors.map((debtor, index) => `${index + 1}. ${debtor.paid ? '✅': '❌'} ${debtor.name}`).join('\n');
+  let debtorsList = debtors.map((debtor, index) => {
+    const soccer = debtor.soccer ? '⚽' : '';
+    const barbecue = debtor.barbecue ? '🥩' : '';
+    const coke = debtor.coke ? '🥤' : '';
+
+    let debitValue = 0;
+    
+    debitValue += soccer ? 12 : 0;
+    debitValue += barbecue ? 20 : 0;
+    debitValue += coke ? 5 : 0; 
+
+    return `${debtor.paid ? '✅': '❌'} ${debtor.name.trim()} ${soccer.trim()}${barbecue.trim()}${coke.trim()}\n  \`\`\`Valor: [${formatToBRL(debitValue)}]\`\`\``
+  }).join('\n\n');
 
   return debtorsList
 }
