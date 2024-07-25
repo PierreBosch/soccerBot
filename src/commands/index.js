@@ -39,7 +39,7 @@ const commands = ({
   '/cobrar': sendPaymentMessages,
   '/gerar-lista-cobranca': createDebtorsList,
   '/apagar-lista-cobranca': deleteDebtorsList,
-  '/serasa': getDebtorsList,
+  '/serasa': createDebtorsList,
   '/pago': clearDebt,
 })
 

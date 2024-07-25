@@ -1,6 +1,7 @@
 const admins = [
   "554896742125@c.us",
-  "554896106006@c.us"
+  "554896106006@c.us",
+  "554899423230@c.us"
 ];
 
 function isAdmin(phoneId) {
