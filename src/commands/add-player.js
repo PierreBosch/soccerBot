@@ -15,7 +15,7 @@ async function addPlayer(message, client) {
 
       const currentPlayersList =  await getPlayers();
 
-      const playerNameExists = currentPlayersList.find(player = player.name === getPlayerName(playerName))
+      const playerNameExists = currentPlayersList.find(player => player.name === getPlayerName(playerName))
 
       if(playerNameExists) {
         return await client.sendText(sender, playerAlreadyExistsException)
