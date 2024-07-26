@@ -26,6 +26,7 @@ async function addBarbecueEater(message, client) {
       const barbecueEaterFound = barbecueEaters.find(barbecueEater => barbecueEater.name === playerName || barbecueEater.name === barbecueEaterGuest)
 
       if(barbecueEaterFound) {
+        console.log(message.body.split('-')[0])
         if(message.body.split('-')[0] === 'fora' && barbecueEaterFound.stayForCoke) {
           await addCokeToBarbecueEater(barbecueEaterFound, false)
 
