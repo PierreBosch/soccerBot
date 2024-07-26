@@ -27,13 +27,13 @@ async function addBarbecueEater(message, client) {
 
       if(barbecueEaterFound) {
         if(message.body.split('-')[0] === '/fora' && barbecueEaterFound.stayForCoke) {
-          await addCokeToBarbecueEater(barbecueEaterFound, false)
+          await addCokeToBarbecueEater(barbecueEaterFound.id, false)
 
           const barbecueEatersTemplate = await getBarbecueEatersTemplate();
           return await client.sendText(sender, barbecueEatersTemplate);
         }
         if(message.body.split('-')[1] === 'coca' && !barbecueEaterFound.stayForCoke) {
-          await addCokeToBarbecueEater(barbecueEaterFound, true)
+          await addCokeToBarbecueEater(barbecueEaterFound.id, true)
 
           const barbecueEatersTemplate = await getBarbecueEatersTemplate();
           return await client.sendText(sender, barbecueEatersTemplate);
