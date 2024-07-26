@@ -5,7 +5,7 @@ const getRandomFunSentence = require('../util/get-random-fun-sentence');
 const funnyPhrasesOnAddBarbecue = require('../sentences/funny-on-add-barbecue');
 const addBarbecueEaterService = require('../http/add-to-barbecue');
 const isAdmin = require('../permissions');
-const getBarbecueEaters = require('./get-barbecue-eaters');
+const getBarbecueEaters = require('../http/get-barbecue-eaters');
 
 const barbecueEaterAlreadyExistsException = "Você já está na lista do churrasco, seu nome não pode ser adicionado mais de uma vez"
 
