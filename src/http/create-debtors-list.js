@@ -24,10 +24,6 @@ async function createDebtorsList(debtors) {
       coke: !!foundBarbecueList ? foundBarbecueList.stayForCoke : false
     }
 
-    if(!!foundDebtor) {
-      return await api.put(`/debtors/${foundDebtor.id}`, { ...debtor })
-    }
-
     return await api.post('/debtors', { ...debtor })
   })
 }
