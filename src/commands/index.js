@@ -17,7 +17,7 @@ const sendPaymentMessages = require('./send-payment-messages');
 const createDebtorsList = require('./create-debtors-list');
 const clearDebt = require('./clear-debt');
 const deleteDebtorsList = require('./delete-debtors-list');
-const getDebtorsList = require('./get-debtors-list');
+const deleteBarbecueEatersList = require('./delete-barbecue-eaters-list');
 
 const commands = ({
   '/add': addPlayer,
@@ -36,6 +36,7 @@ const commands = ({
   '/add-churras-coca': addBarbecueEater,
   '/fora-churras': deleteBarbecueEater,
   '/lista-churras': getBarbecueEaters,
+  '/apagar-lista-churras': deleteBarbecueEatersList,
   '/cobrar': sendPaymentMessages,
   '/gerar-lista-cobranca': createDebtorsList,
   '/apagar-lista-cobranca': deleteDebtorsList,
