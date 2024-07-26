@@ -33,6 +33,8 @@ const commands = ({
   '/ajuda': getAvailableCommands,
   '/escalacao': getLineup,
   '/add-churras': addBarbecueEater,
+  '/fora-coca': addBarbecueEater,
+  '/add-coca': addBarbecueEater,
   '/add-churras-coca': addBarbecueEater,
   '/fora-churras': deleteBarbecueEater,
   '/lista-churras': getBarbecueEaters,

@@ -15,6 +15,8 @@ async function sendPaymentMessages(message, client) {
       await client.sendText(billing.phone, billingTemplate.replace(/{nome}/g, getPlayerName(billing.name, true)));
       await delay(8000);
     })
+  } else {
+    await client.sendText(messsage.from, 'Somente admins, podem disparar mensagem de cobrança');
   }
 }
 

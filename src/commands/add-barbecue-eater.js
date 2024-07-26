@@ -6,6 +6,7 @@ const funnyPhrasesOnAddBarbecue = require('../sentences/funny-on-add-barbecue');
 const addBarbecueEaterService = require('../http/add-to-barbecue');
 const isAdmin = require('../permissions');
 const getBarbecueEaters = require('../http/get-barbecue-eaters');
+const addCokeToBarbecueEater = require('../http/add-coke-to-barbecue-eater');
 
 const barbecueEaterAlreadyExistsException = "Você já está na lista do churrasco, seu nome não pode ser adicionado mais de uma vez"
 
@@ -22,9 +23,22 @@ async function addBarbecueEater(message, client) {
 
       const barbecueEaters = await getBarbecueEaters();
 
-      const barbecueEaterExists = barbecueEaters.find(barbecueEater => barbecueEater.name === playerName || barbecueEater.name === barbecueEaterGuest)
+      const barbecueEaterFound = barbecueEaters.find(barbecueEater => barbecueEater.name === playerName || barbecueEater.name === barbecueEaterGuest)
 
-      if(barbecueEaterExists) {
+      if(barbecueEaterFound) {
+        if(message.body.split('-')[0] === 'fora' && !barbecueEaterFound.stayForCoke) {
+          await addCokeToBarbecueEater(barbecueEaterFound, false)
+
+          const barbecueEatersTemplate = await getBarbecueEatersTemplate();
+          return await client.sendText(sender, barbecueEatersTemplate);
+        }
+        if(message.body.split('-')[1] === 'coca' && !barbecueEaterFound.stayForCoke) {
+          await addCokeToBarbecueEater(barbecueEaterFound, true)
+
+          const barbecueEatersTemplate = await getBarbecueEatersTemplate();
+          return await client.sendText(sender, barbecueEatersTemplate);
+        }
+
         return await client.sendText(sender, barbecueEaterAlreadyExistsException)
       }
 
