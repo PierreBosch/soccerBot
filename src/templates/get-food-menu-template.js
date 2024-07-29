@@ -1,7 +1,9 @@
 function getFoodMenuTemplate() {
   return `*👨🏻‍🍳 Cardápio da Semana*
 
-🫘🥖 Choripan`;
+🥩 Churrasco
+🥖 Pão d'água
+🫘 Salame Cancelier Puro`;
 }
 
 module.exports = getFoodMenuTemplate

@@ -1,9 +1,13 @@
 async function getLineup(message, client) {
   const sender = message.from;
   
-  const imageUrl = 'https://i.ibb.co/StfC3RS/DOIS-TIMES-NO-MESMO-CAMPO-5.png'
+  const imageUrl = null
   
-  await client.sendImage(sender, imageUrl)              
+  if(imageUrl !== null) {
+    await client.sendImage(sender, imageUrl)              
+  } else {
+    await client.sendText(sender, 'Calma calabreso! A escalação ainda está sendo montada.')
+  }
 }
 
 module.exports = getLineup
