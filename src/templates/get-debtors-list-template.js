@@ -14,6 +14,12 @@ function getDebtorsList(debtors) {
     debitValue += coke ? 5 : 0; 
 
     return `${debtor.paid ? '✅': '❌'} ${debtor.name.trim()} ${soccer.trim()}${barbecue.trim()}${coke.trim()}\n  \`\`\`Valor: [${formatToBRL(debitValue)}]\`\`\``
+  }).sort((a, b) => {
+    if (a.paid === b.paid) {
+      return 0; // Se ambos têm a mesma condição de pagamento, mantém a ordem atual
+    }
+    
+    return a.paid ? -1 : 1; // Prioriza os pagos (true) antes dos não pagos (false)
   }).join('\n\n');
 
   return debtorsList
