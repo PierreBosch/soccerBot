@@ -16,7 +16,7 @@ async function deleteBarbecueEatersList(message, client) {
   
  if(barbecueEaters.length > 0) {
   barbecueEaters.forEach(async (barbecueEater) => {
-    await api.delete(`/barbecueEaters/${id}`)
+    await api.delete(`/barbecueEaters/${barbecueEater.id}`)
   });
  }
 

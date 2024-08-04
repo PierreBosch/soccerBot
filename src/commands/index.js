@@ -40,8 +40,7 @@ const commands = ({
   '/lista-churras': getBarbecueEaters,
   '/apagar-lista-churras': deleteBarbecueEatersList,
   '/cobrar': sendPaymentMessages,
-  '/gerar-lista-cobranca': createDebtorsList,
-  '/apagar-lista-cobranca': deleteDebtorsList,
+  '/limpar-serasa': deleteDebtorsList,
   '/serasa': createDebtorsList,
   '/pago': clearDebt,
 })
