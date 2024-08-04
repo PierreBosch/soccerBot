@@ -21,7 +21,7 @@ async function getBarbecueEatersTemplate() {
   return `*🍖 Churrasco Pós-Futebol*
 
 📅 *Data*: Quarta-feira
-🕢 *Horário*: 20h30
+🕢 *Horário*: 20h00
 💵 *Valor*: R$ 20,00
 
 *Participantes*
