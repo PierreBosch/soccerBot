@@ -38,7 +38,7 @@ const commands = ({
   '/add-churras-coca': addBarbecueEater,
   '/fora-churras': deleteBarbecueEater,
   '/lista-churras': getBarbecueEaters,
-  '/apagar-lista-churras': deleteBarbecueEatersList,
+  '/limpar-churras': deleteBarbecueEatersList,
   '/cobrar': sendPaymentMessages,
   '/limpar-serasa': deleteDebtorsList,
   '/serasa': createDebtorsList,

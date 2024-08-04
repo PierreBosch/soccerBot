@@ -11,8 +11,12 @@ async function getSoccerListTemplate() {
 
   return `📢 *Avisos*
 
-⚽ Futebol Quarta-feira⏱19h30
-🏟 Estádio: Santiago Bernandrino
+⚽ Futebol Quarta-feira⏱19h00
+🏟 Arena: Andrino Campo 3
+
+*Fique atento ao horário novo*
+
+*18h30 começa o aquecimento*
     
 🚨 Evite desistências
 🚨 6 na linha 1 no Gol e 2 reservas
