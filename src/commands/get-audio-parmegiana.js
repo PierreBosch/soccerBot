@@ -7,9 +7,9 @@ function convertOggToBase64(filePath) {
     return base64Audio;
 }
 
-async function getAudioParmegiana(message, client) {
+async function getAudioVidao(message, client) {
     const sender = message.from;
-    const filePath = path.resolve(__dirname, '../audios/audio-parmegiana.mp3');
+    const filePath = path.resolve(__dirname, '../audios/a-vida-e-um-lazer.mp3.mp3');
     let base64String = convertOggToBase64(filePath);
 
     base64String = `data:audio/mp3;base64,${base64String}`;
@@ -19,5 +19,6 @@ async function getAudioParmegiana(message, client) {
 
 }
 
-module.exports = getAudioParmegiana;
+module.exports = getAudioVidao;
+
 
