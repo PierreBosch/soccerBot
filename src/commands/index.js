@@ -19,7 +19,7 @@ const clearDebt = require('./clear-debt');
 const deleteDebtorsList = require('./delete-debtors-list');
 const deleteBarbecueEatersList = require('./delete-barbecue-eaters-list');
 const getAudioParmegiana = require('./get-audio-parmegiana');
-const getAudioVidao = require('./get-audio-parmegiana');
+const getVidaoAudio = require('./get-vidao-audio');
 
 const commands = ({
   '/add': addPlayer,
@@ -46,7 +46,7 @@ const commands = ({
   '/serasa': createDebtorsList,
   '/pago': clearDebt,
   '/parmegiana': getAudioParmegiana,
-  '/vidao': getAudioVidao,
+  '/vidao': getVidaoAudio,
 })
 
 
