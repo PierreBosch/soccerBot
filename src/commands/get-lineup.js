@@ -1,11 +1,11 @@
 async function getLineup(message, client) {
   const sender = message.from;
 
-  const imageUrl = 'https://i.ibb.co/8b7tKk3/escalacao-11-09.png'
+  const imageUrl = 'https://i.ibb.co/ZgfkmyZ/Escalac-a-o-26-08-24-3.png'
 
-  if (imageUrl !== null) {
+  try {
     await client.sendImage(sender, imageUrl)
-  } else {
+  } catch (error) {
     await client.sendText(sender, 'Calma calabreso! A escalação ainda está sendo montada.')
   }
 }
