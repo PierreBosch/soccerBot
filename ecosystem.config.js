@@ -4,13 +4,15 @@ module.exports = {
       name: "futebot-start",
       script: "npm",
       args: "run start",
-      watch: false
+      watch: false,
+      autorestart: true,     
     },
     {
       name: "futebot-db",
       script: "npm",
       args: "run db",
-      watch: false
+      watch: false,
+      autorestart: true,     
     }
   ]
 };
