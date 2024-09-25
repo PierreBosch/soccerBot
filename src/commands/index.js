@@ -42,6 +42,7 @@ const commands = ({
   '/fora-churras': deleteBarbecueEater,
   '/convidado-churras': addGuestToBarbecueList,
   '/convidado-churras-coca': addGuestToBarbecueList,
+  '/convidado-coca': addGuestToBarbecueList,
   '/fora-coca-convidado': addGuestToBarbecueList,
   '/add-coca-convidado': addGuestToBarbecueList,
   '/lista-churras': getBarbecueEaters,
