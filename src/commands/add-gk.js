@@ -5,7 +5,7 @@ const getSoccerListTemplate = require('../templates/get-soccer-list-template');
 const getRandomFunSentence = require('../util/get-random-fun-sentence');
 const funnyPhrasesOnAdd = require('../sentences/funny-on-add-gk');
 
-const soldOutExceptionAnswer = `A lista com 2 goleiros já está completa, não é possível adicionar`
+const soldOutExceptionAnswer = 'A lista com 2 goleiros já está completa, não é possível adicionar'
 
 async function addGoalKeeper(message, client) {
   try {

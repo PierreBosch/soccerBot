@@ -20,6 +20,7 @@ const deleteDebtorsList = require('./delete-debtors-list');
 const deleteBarbecueEatersList = require('./delete-barbecue-eaters-list');
 const getAudioParmegiana = require('./get-audio-parmegiana');
 const getVidaoAudio = require('./get-vidao-audio');
+const addGuestToBarbecueList = require('./add-guest-to-barbecue-list');
 
 const commands = ({
   '/add': addPlayer,
@@ -39,6 +40,9 @@ const commands = ({
   '/add-coca': addBarbecueEater,
   '/add-churras-coca': addBarbecueEater,
   '/fora-churras': deleteBarbecueEater,
+  '/convidado-churras': addGuestToBarbecueList,
+  '/fora-coca-convidado': addGuestToBarbecueList,
+  '/add-coca-convidado': addGuestToBarbecueList,
   '/lista-churras': getBarbecueEaters,
   '/limpar-churras': deleteBarbecueEatersList,
   '/cobrar': sendPaymentMessages,
