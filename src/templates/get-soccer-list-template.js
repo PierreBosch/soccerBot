@@ -29,16 +29,13 @@ ${getPlayersTemplate(players).trim()}
 *Goleiros*
 
 ${getGoalKeepersTemplate(goalKeepers).trim()}
-
 ${getWaitingListTemplate(players) || getWaitingListTemplate(goalKeepers) && `
 *Lista de Espera*
 `}
-
 ${getWaitingListTemplate(players) && `
 *Linha*
 ${getWaitingListTemplate(players)}
 `}
-
 ${getWaitingListTemplate(goalKeepers) &&`
 *Goleiros*
 ${getWaitingListTemplate(goalKeepers)}
