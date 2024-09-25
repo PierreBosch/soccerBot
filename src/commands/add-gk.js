@@ -5,7 +5,7 @@ const getSoccerListTemplate = require('../templates/get-soccer-list-template');
 const getRandomFunSentence = require('../util/get-random-fun-sentence');
 const funnyPhrasesOnAdd = require('../sentences/funny-on-add-gk');
 
-const soldOutExceptionAnswer = 'A lista com 2 goleiros já está completa, não é possível adicionar'
+const soldOutExceptionAnswer = 'A lista com 2 goleiros já está completa, você foi colocado na lista de espera'
 
 async function addGoalKeeper(message, client) {
   try {
@@ -15,11 +15,12 @@ async function addGoalKeeper(message, client) {
       const currentGoalKeepersList =  await getGoalKeepers();
 
       if(currentGoalKeepersList.length === 2) {
+        await addGoalKeeperService(getPlayerName(playerName), true)
         return await client.sendText(sender, soldOutExceptionAnswer)
       }
 
-      await addGoalKeeperService(getPlayerName(playerName))
-
+      await addPlayerService(getPlayerName(playerName))
+      
       const firstName = getPlayerName(playerName, true);
       const funnyAnswer = getRandomFunSentence(funnyPhrasesOnAdd, firstName);
 

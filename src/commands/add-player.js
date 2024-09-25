@@ -5,7 +5,7 @@ const getSoccerListTemplate = require('../templates/get-soccer-list-template');
 const getRandomFunSentence = require('../util/get-random-fun-sentence');
 const funnyPhrasesOnAdd = require('../sentences/funny-on-add');
 
-const soldOutExceptionAnswer = 'A lista com 16 jogadores já está completa, não é possível adicionar'
+const soldOutExceptionAnswer = 'A lista com 16 jogadores já está completa, você foi colocado na lista de espera'
 const playerAlreadyExistsException = 'Você já está na lista do futebol, seu nome não pode ser adicionado mais de uma vez'
 
 async function addPlayer(message, client) {
@@ -22,11 +22,11 @@ async function addPlayer(message, client) {
       }
 
       if(currentPlayersList.length === 16) {
+        await addPlayerService(getPlayerName(playerName), true)
         return await client.sendText(sender, soldOutExceptionAnswer)
       }
-
       await addPlayerService(getPlayerName(playerName))
-
+      
       const firstName = getPlayerName(playerName, true);
       const funnyAnswer = getRandomFunSentence(funnyPhrasesOnAdd, firstName);
 

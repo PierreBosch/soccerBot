@@ -1,7 +1,7 @@
 const api = require('../config/config-http');
 
-async function addPlayer(name) {
-  await api.post('/players', { name })
+async function addPlayer(name, isWaitingList = false) {
+  await api.post('/players', { name, isWaitingList })
 }
 
 module.exports = addPlayer;

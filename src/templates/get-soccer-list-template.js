@@ -3,6 +3,7 @@ const getGoalKeepersTemplate = require('../templates/get-goal-keepers-template')
 
 const getPlayers = require('../http/get-players');
 const getGoalKeepers = require('../http/get-goal-keepers');
+const getWaitingListTemplate = require('./get-waiting-list-template');
 
 async function getSoccerListTemplate() {
 
@@ -27,7 +28,22 @@ ${getPlayersTemplate(players).trim()}
 
 *Goleiros*
 
-${getGoalKeepersTemplate(goalKeepers).trim()}`
+${getGoalKeepersTemplate(goalKeepers).trim()}
+
+${getWaitingListTemplate(players) || getWaitingListTemplate(goalKeepers) && `
+*Lista de Espera*
+`}
+
+${getWaitingListTemplate(players) && `
+*Linha*
+${getWaitingListTemplate(players)}
+`}
+
+${getWaitingListTemplate(goalKeepers) &&`
+*Goleiros*
+${getWaitingListTemplate(goalKeepers)}
+`}
+`
 }
 
 module.exports = getSoccerListTemplate
