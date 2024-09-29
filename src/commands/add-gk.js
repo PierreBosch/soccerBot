@@ -19,7 +19,7 @@ async function addGoalKeeper(message, client) {
         return await client.sendText(sender, soldOutExceptionAnswer)
       }
 
-      await addPlayerService(getPlayerName(playerName))
+      await addGoalKeeperService(getPlayerName(playerName))
       
       const firstName = getPlayerName(playerName, true);
       const funnyAnswer = getRandomFunSentence(funnyPhrasesOnAdd, firstName);

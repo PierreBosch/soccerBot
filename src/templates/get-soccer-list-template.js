@@ -34,13 +34,10 @@ ${getWaitingListTemplate(players) || getWaitingListTemplate(goalKeepers) && `
 `}
 ${getWaitingListTemplate(players) && `
 *Linha*
-${getWaitingListTemplate(players)}
-`}
+${getWaitingListTemplate(players).trim()}`}
 ${getWaitingListTemplate(goalKeepers) &&`
 *Goleiros*
-${getWaitingListTemplate(goalKeepers)}
-`}
-`
+${getWaitingListTemplate(goalKeepers).trim()}`}`
 }
 
 module.exports = getSoccerListTemplate
