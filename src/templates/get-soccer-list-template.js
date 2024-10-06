@@ -42,10 +42,10 @@ ${queueHasPlayers && `
 `}
 ${queuePlayersExist && `
 *Linha*
-${queuePlayers.trim()}`}
+${queuePlayersExist && queuePlayers}`.trim()}
 ${queueGoalKeepersExist && `
 *Goleiros*
-${queueGoalKeepers.trim()}`}`.trim()
+${queueGoalKeepersExist && queueGoalKeepers}`.trim()}`.trim()
 }
 
 module.exports = getSoccerListTemplate
