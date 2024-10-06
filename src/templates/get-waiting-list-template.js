@@ -3,7 +3,7 @@ function getWaitingListTemplate(list, isGoalKeepersList = false) {
   const emoji = isGoalKeepersList ? '🧤' : '🏃🏻'
   const waitingListTemplate = waitingList.map((player, index) => `${emoji}${index + 1}. ${player.name}`).join('\n');
 
-  const result = waitingList.length === 0 ? waitingListTemplate : ''
+  const result = waitingList.length !== 0 ? waitingListTemplate : ''
 
   return result
 }
