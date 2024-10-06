@@ -15,8 +15,8 @@ async function getSoccerListTemplate() {
   const queueGoalKeepers = getWaitingListTemplate(onlyQueueGoalKeepers, true)
 
   const queueHasPlayers = Boolean(queuePlayers) || Boolean(queueGoalKeepers)
-  const queuePlayersExist = Boolean(queuePlayers)
-  const queueGoalKeepersExist = Boolean(goalKeepers)
+  const queuePlayersExist = Boolean(onlyQueuePlayers)
+  const queueGoalKeepersExist = Boolean(onlyQueueGoalKeepers)
 
   return `📢 *Avisos*
 
