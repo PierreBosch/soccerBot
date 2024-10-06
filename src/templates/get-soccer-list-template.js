@@ -9,6 +9,12 @@ async function getSoccerListTemplate() {
 
   const players = await getPlayers();
   const goalKeepers = await getGoalKeepers();
+  const queuePlayers = getWaitingListTemplate(players)
+  const queueGoalKeepers = getWaitingListTemplate(goalKeepers, true)
+
+  const queueHasPlayers = Boolean(queuePlayers) || Boolean(queueGoalKeepers)
+  const queuePlayersExist = Boolean(queuePlayers)
+  const queueGoalKeepersExist = Boolean(goalKeepers)
 
   return `📢 *Avisos*
 
@@ -29,15 +35,15 @@ ${getPlayersTemplate(players).trim()}
 *Goleiros*
 
 ${getGoalKeepersTemplate(goalKeepers).trim()}
-${getWaitingListTemplate(players) || getWaitingListTemplate(goalKeepers) && `
+${queueHasPlayers && `
 *Lista de Espera*
 `}
-${getWaitingListTemplate(players) && `
+${queuePlayersExist && `
 *Linha*
-${getWaitingListTemplate(players).trim()}`}
-${getWaitingListTemplate(goalKeepers) &&`
+${queuePlayers.trim()}`}
+${queueGoalKeepersExist && `
 *Goleiros*
-${getWaitingListTemplate(goalKeepers).trim()}`}`.trim()
+${queueGoalKeepers.trim()}`}`.trim()
 }
 
 module.exports = getSoccerListTemplate
