@@ -9,8 +9,10 @@ async function getSoccerListTemplate() {
 
   const players = await getPlayers();
   const goalKeepers = await getGoalKeepers();
-  const queuePlayers = getWaitingListTemplate(players)
-  const queueGoalKeepers = getWaitingListTemplate(goalKeepers, true)
+  const onlyQueuePlayers = await getPlayers();
+  const onlyQueueGoalKeepers = await getGoalKeepers();
+  const queuePlayers = getWaitingListTemplate(onlyQueuePlayers)
+  const queueGoalKeepers = getWaitingListTemplate(onlyQueueGoalKeepers, true)
 
   const queueHasPlayers = Boolean(queuePlayers) || Boolean(queueGoalKeepers)
   const queuePlayersExist = Boolean(queuePlayers)
