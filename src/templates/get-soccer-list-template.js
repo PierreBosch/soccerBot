@@ -40,10 +40,10 @@ ${getPlayersTemplate(players).trim()}
 *Goleiros*
 
 ${getGoalKeepersTemplate(goalKeepers).trim()}
+
 ${queueHasPlayers && '*Lista de Espera*'}
-${queuePlayersExist && '*Linha*'}
+
 ${queuePlayersExist && queuePlayersTemplate.trim()}
-${queueGoalKeepersExist && '*Goleiros*'}
 ${queueGoalKeepersExist && queueGoalKeepersTemplate.trim()}
 `
 }
