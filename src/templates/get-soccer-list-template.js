@@ -43,8 +43,8 @@ ${getGoalKeepersTemplate(goalKeepers).trim()}
 
 ${queueHasPlayers && '*Lista de Espera*'}
 
-${queuePlayersExist && queuePlayersTemplate.trim()}
-${queueGoalKeepersExist && queueGoalKeepersTemplate.trim()}
+${queuePlayersExist ? queuePlayersTemplate.trim() : ''}
+${queueGoalKeepersExist ? queueGoalKeepersTemplate.trim() : ''}
 `
 }
 
