@@ -4,6 +4,7 @@ const getGoalKeepersTemplate = require('../templates/get-goal-keepers-template')
 const getPlayers = require('../http/get-players');
 const getGoalKeepers = require('../http/get-goal-keepers');
 const getWaitingListTemplate = require('./get-waiting-list-template');
+const { isEmpty } = require('lodash');
 
 async function getSoccerListTemplate() {
 
@@ -15,10 +16,10 @@ async function getSoccerListTemplate() {
 
   const queuePlayersTemplate = getWaitingListTemplate(onlyQueuePlayers)
   const queueGoalKeepersTemplate = getWaitingListTemplate(onlyQueueGoalKeepers, true)
-
-  const queueHasPlayers = Boolean(queuePlayersTemplate) || Boolean(queueGoalKeepersTemplate)
-  const queuePlayersExist = Boolean(onlyQueuePlayers)
-  const queueGoalKeepersExist = Boolean(onlyQueueGoalKeepers)
+  
+  const queuePlayersExist = !isEmpty(onlyQueuePlayers)
+  const queueGoalKeepersExist = !isEmpty(onlyQueueGoalKeepers)
+  const queueHasPlayers = queuePlayersExist || queueGoalKeepersExist
 
   return `📢 *Avisos*
 
@@ -39,15 +40,12 @@ ${getPlayersTemplate(players).trim()}
 *Goleiros*
 
 ${getGoalKeepersTemplate(goalKeepers).trim()}
-${queueHasPlayers && `
-*Lista de Espera*
-`}
-${queuePlayersExist && `
-*Linha*
-${queuePlayersExist && queuePlayersTemplate}`.trim()}
-${queueGoalKeepersExist && `
-*Goleiros*
-${queueGoalKeepersExist && queueGoalKeepersTemplate}`.trim()}`.trim()
+${queueHasPlayers && '*Lista de Espera*'}
+${queuePlayersExist && '*Linha*'}
+${queuePlayersExist && queuePlayersTemplate.trim()}
+${queueGoalKeepersExist && '*Goleiros*'}
+${queueGoalKeepersExist && queueGoalKeepersTemplate.trim()}
+`
 }
 
 module.exports = getSoccerListTemplate
