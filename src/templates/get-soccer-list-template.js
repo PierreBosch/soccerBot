@@ -21,18 +21,26 @@ async function getSoccerListTemplate() {
   const queueGoalKeepersExist = !isEmpty(onlyQueueGoalKeepers)
   const queueHasPlayers = queuePlayersExist || queueGoalKeepersExist
 
-  return `📢 *Avisos*
+  return `⚽ *Futebol dos Brothers*
 
-⚽ Futebol Quarta-feira⏱19h00
-🏟 Arena: Andrino Campo 3
+🚨 *Evite desistências*
+💰 *Pagamento antecipado*
 
-*Fique atento ao horário novo*
+🗓️ *Dia da semana:* Quarta feira
+⏰ *Horário:* 19h00
+🏟 *Arena:* Andrino Campo 3
 
-*18h30 começa o aquecimento*
-    
-🚨 Evite desistências
-🚨 6 na linha 1 no Gol e 2 reservas
-    
+*🤖 Comandos*
+
+*Linha*
+_Digite_ \`/add\` _para participar_
+
+*Goleiro*
+_Digite_ \`/goleiro\` _para participar_
+
+*Desistir*
+_Digite_ \`/fora\` _para sair da lista_
+
 *Jogadores*
 
 ${getPlayersTemplate(players).trim()}
@@ -41,11 +49,10 @@ ${getPlayersTemplate(players).trim()}
 
 ${getGoalKeepersTemplate(goalKeepers).trim()}
 
-${queueHasPlayers && '*Lista de Espera*'}
-
+${queueHasPlayers ? '*Lista de Espera* \n' : ''}
 ${queuePlayersExist ? queuePlayersTemplate.trim() : ''}
 ${queueGoalKeepersExist ? queueGoalKeepersTemplate.trim() : ''}
-`
+`.trim()
 }
 
 module.exports = getSoccerListTemplate

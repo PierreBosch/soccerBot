@@ -21,6 +21,7 @@ const deleteBarbecueEatersList = require('./delete-barbecue-eaters-list');
 const getAudioParmegiana = require('./get-audio-parmegiana');
 const getVidaoAudio = require('./get-vidao-audio');
 const addGuestToBarbecueList = require('./add-guest-to-barbecue-list');
+const createMVPPoll = require('./create-mvp-poll');
 
 const commands = ({
   '/add': addPlayer,
@@ -53,7 +54,9 @@ const commands = ({
   '/pago': clearDebt,
   '/parmegiana': getAudioParmegiana,
   '/vidao': getVidaoAudio,
+  '/mvp': createMVPPoll,
 })
+
 
 
 function executeCommand(command, ...args) {
@@ -66,7 +69,7 @@ function executeCommand(command, ...args) {
 
 function start(client) {
   client.onMessage(async (message) => {
-      const [command] = message.body.toLowerCase().split(' ');
+      const [command] = message.body.toLowerCase().split(' ');  
       
       if(command.trim().startsWith('/')) {
         executeCommand(command, message, client)

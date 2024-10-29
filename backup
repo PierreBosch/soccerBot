@@ -1,0 +1,244 @@
+{
+  "players": [
+    {
+      "id": "3db1",
+      "name": "Pierre Boschetto",
+      "isWaitingList": false
+    },
+    {
+      "id": "27b8",
+      "name": "Fernando Melo",
+      "isWaitingList": false
+    },
+    {
+      "id": "b4d7",
+      "name": "Marcos Paulo",
+      "isWaitingList": false
+    },
+    {
+      "id": "fb07",
+      "name": "Rodrigo Vechi",
+      "isWaitingList": false
+    },
+    {
+      "id": "6329",
+      "name": "Douglas Fraga",
+      "isWaitingList": false
+    },
+    {
+      "id": "5fb9",
+      "name": "Guilherme Kfouri",
+      "isWaitingList": false
+    },
+    {
+      "id": "f745",
+      "name": "Peter",
+      "isWaitingList": false
+    },
+    {
+      "id": "fa8d",
+      "name": "Waze Clothing",
+      "isWaitingList": false
+    },
+    {
+      "id": "5aa2",
+      "name": "Mario Viana",
+      "isWaitingList": false
+    },
+    {
+      "id": "3bfe",
+      "name": "Arthur Biehl",
+      "isWaitingList": false
+    },
+    {
+      "id": "3vfe",
+      "name": "Adriano Camargo",
+      "isWaitingList": false
+    },
+    {
+      "id": "4hdf",
+      "name": "Guilherme Saul",
+      "isWaitingList": false
+    },
+    {
+      "id": "6508",
+      "name": "Ruan Alves",
+      "isWaitingList": false
+    },
+    {
+      "id": "848a",
+      "name": "Gilmar Duarte",
+      "isWaitingList": false
+    },
+    {
+      "id": "2c76",
+      "name": "José Augusto",
+      "isWaitingList": false
+    },
+    {
+      "id": "2ju6",
+      "name": "Guilherme (sócio Vechi)",
+      "isWaitingList": false
+    }
+  ],
+  "goalKeepers": [
+    {
+      "id": "fcf2",
+      "name": "Matheus Botega",
+      "isWaitingList": false
+    }
+  ],
+  "barbecueEaters": [
+    {
+      "id": "3950",
+      "name": "Pierre Boschetto",
+      "stayForCoke": false
+    },
+    {
+      "id": "56c7",
+      "name": "Guilherme Kfouri",
+      "stayForCoke": false
+    },
+    {
+      "id": "cf20",
+      "name": "Rodrigo Vechi",
+      "stayForCoke": true
+    },
+    {
+      "id": "e862",
+      "name": "Adriano Camargo",
+      "stayForCoke": false
+    }
+  ],
+  "billingPhones": [],
+  "debtors": [
+    {
+      "id": "4998",
+      "name": "Pierre Boschetto",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "6f94",
+      "name": "Fernando Melo",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "11fe",
+      "name": "Marcos Paulo",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "aec2",
+      "name": "Eduardo Vilaverde",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "e3dc",
+      "name": "Rodrigo Vechi",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "2edf",
+      "name": "Douglas Fraga",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "d7fb",
+      "name": "Guilherme Kfouri",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "f884",
+      "name": "Vinicius Benedet",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "c342",
+      "name": "Peter",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "80db",
+      "name": "Waze Clothing",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "4ea0",
+      "name": "Mario Viana",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "85b3",
+      "name": "Arthur Biehl",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "6bbe",
+      "name": "Adriano Camargo",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "feb1",
+      "name": "Guilherme Saul",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "2115",
+      "name": "Ruan Alves",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    },
+    {
+      "id": "691e",
+      "name": "Gilmar Duarte",
+      "paid": false,
+      "soccer": true,
+      "barbecue": false,
+      "coke": false
+    }
+  ]
+}

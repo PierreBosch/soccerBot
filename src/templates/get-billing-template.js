@@ -11,7 +11,7 @@ Amanhã é dia de brilhar nos gramados e garantir aquele golzinho maroto! 🌟 A
 
 💸 Chave PIX: (48) 99674-2125 (Bradesco)
 
-Ah, e não esquece de mandar aquele “Pago!” quando fizer a transferência. Queremos todo mundo relaxado pra curtir o jogo e a resenha depois! 😎
+Ah, e não esquece de mandar aquele “/pago” quando fizer a transferência. Queremos todo mundo relaxado pra curtir o jogo e a resenha depois! 😎
 
 Agradeço desde já e bora fazer desse jogo um sucesso! 🚀
 

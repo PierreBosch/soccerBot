@@ -10,11 +10,11 @@ const playerAlreadyExistsException = 'Você já está na lista do futebol, seu n
 
 async function addPlayer(message, client) {
   try {
-      const playerName = message.sender.pushname;
+      const playerName = message.sender.pushname;  
       const sender = message.from;
 
       const currentPlayersList =  await getPlayers();
-
+      
       const playerNameExists = currentPlayersList.find(player => player.name === getPlayerName(playerName))
 
       if(playerNameExists) {
@@ -22,7 +22,9 @@ async function addPlayer(message, client) {
       }
 
       if(currentPlayersList.length === 16) {
-        await addPlayerService(getPlayerName(playerName), true)
+        const isWaitingList= true;
+        
+        await addPlayerService(getPlayerName(playerName), isWaitingList)
         return await client.sendText(sender, soldOutExceptionAnswer)
       }
       await addPlayerService(getPlayerName(playerName))
