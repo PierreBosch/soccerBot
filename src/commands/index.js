@@ -22,6 +22,9 @@ const getAudioParmegiana = require('./get-audio-parmegiana');
 const getVidaoAudio = require('./get-vidao-audio');
 const addGuestToBarbecueList = require('./add-guest-to-barbecue-list');
 const createMVPPoll = require('./create-mvp-poll');
+const createGroup = require('./groups/create-group');
+const getParticipantsList = require('./groups/get-participants-list');
+const getProblematicoAudio = require('./get-problematico-audio');
 
 const commands = ({
   '/add': addPlayer,
@@ -55,6 +58,9 @@ const commands = ({
   '/parmegiana': getAudioParmegiana,
   '/vidao': getVidaoAudio,
   '/mvp': createMVPPoll,
+  '/configurar': createGroup,
+  '/visualizar': getParticipantsList,
+  '/problematico': getProblematicoAudio
 })
 
 
