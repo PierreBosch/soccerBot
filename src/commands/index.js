@@ -25,6 +25,8 @@ const createMVPPoll = require('./create-mvp-poll');
 const createGroup = require('./groups/create-group');
 const getParticipantsList = require('./groups/get-participants-list');
 const getProblematicoAudio = require('./get-problematico-audio');
+const addParticipantList = require('./groups/add-participant-list');
+const deleteParticipantList = require('./groups/delete-participant-list');
 
 const commands = ({
   '/add': addPlayer,
@@ -58,9 +60,11 @@ const commands = ({
   '/parmegiana': getAudioParmegiana,
   '/vidao': getVidaoAudio,
   '/mvp': createMVPPoll,
+  '/problematico': getProblematicoAudio,
   '/configurar': createGroup,
-  '/visualizar': getParticipantsList,
-  '/problematico': getProblematicoAudio
+  '/quemvai': getParticipantsList,
+  '/vou': addParticipantList,
+  '/naovou': deleteParticipantList,
 })
 
 

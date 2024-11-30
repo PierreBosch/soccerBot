@@ -1,5 +1,5 @@
 const groupService = require("./http/group-service");
-const listService = require("./http/lists-service");
+const listService = require("./http/list-service");
 async function createGroup(message, client) {
   try {
       const groupId = message.from;
