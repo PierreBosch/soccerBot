@@ -4,13 +4,17 @@ const getPlayerName = require('../util/extract-first-and-last-name');
 const getSoccerListTemplate = require('../templates/get-soccer-list-template');
 const getRandomFunSentence = require('../util/get-random-fun-sentence');
 const funnyPhrasesOnAdd = require('../sentences/funny-on-add');
+const { isEmpty } = require('lodash');
 
 const soldOutExceptionAnswer = 'A lista com 16 jogadores já está completa, você foi colocado na lista de espera'
 const playerAlreadyExistsException = 'Você já está na lista do futebol, seu nome não pode ser adicionado mais de uma vez'
 
 async function addPlayer(message, client) {
   try {
-      const playerName = message.sender.pushname;  
+      const guestName = message.body.split('|')[1];
+      const isGuest = !isEmpty(guestName);
+      
+      const playerName = isEmpty(isGuest) ? message.sender.pushname : guestName.trim();  
       const sender = message.from;
 
       const currentPlayersList =  await getPlayers();
