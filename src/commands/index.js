@@ -27,6 +27,7 @@ const getParticipantsList = require('./groups/get-participants-list');
 const getProblematicoAudio = require('./get-problematico-audio');
 const addParticipantList = require('./groups/add-participant-list');
 const deleteParticipantList = require('./groups/delete-participant-list');
+const notifyDebtors = require('./notify-debtors');
 
 const commands = ({
   '/add': addPlayer,
@@ -53,7 +54,7 @@ const commands = ({
   '/add-coca-convidado': addGuestToBarbecueList,
   '/lista-churras': getBarbecueEaters,
   '/limpar-churras': deleteBarbecueEatersList,
-  '/cobrar': sendPaymentMessages,
+  '/notificar': notifyDebtors,
   '/limpar-serasa': deleteDebtorsList,
   '/serasa': createDebtorsList,
   '/pago': clearDebt,

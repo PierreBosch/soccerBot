@@ -10,11 +10,20 @@ _mostra lista atual de jogadores e goleiros_
 \`\`\`/add\`\`\`
 _adiciona automaticamente seu nome na lista como jogador de linha_
 
+\`\`\`/add | Nome do convidado\`\`\`
+_adiciona automaticamente o nome do convidado como jogador de linha_
+
 \`\`\`/goleiro\`\`\`
 _adiciona automaticamente seu nome na lista como goleiro_
 
+\`\`\`/goleiro | Nome do convidado\`\`\`
+_adiciona automaticamente o nome do convidado como goleiro_
+
 \`\`\`/fora\`\`\`      
 _retira seu nome automaticamente da lista do futebol_
+
+\`\`\`/fora | Nome do convidado\`\`\`      
+_retira o nome do convidado da lista do futebol_
 
 *🤑 Pagamentos*
 

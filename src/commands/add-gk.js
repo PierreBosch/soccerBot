@@ -12,18 +12,19 @@ async function addGoalKeeper(message, client) {
   try {
       const guestName = message.body.split('|')[1];
       const isGuest = !isEmpty(guestName);
-      
-      const playerName = isEmpty(isGuest) ? message.sender.pushname : guestName.trim();  
+
+      const playerName = isGuest ? guestName.trim() : message.sender.pushname;  
       const sender = message.from;
+      const playerPhoneNumber = !isGuest ?  message.sender.id : null;
       
       const currentGoalKeepersList =  await getGoalKeepers();
 
       if(currentGoalKeepersList.length === 2) {
-        await addGoalKeeperService(getPlayerName(playerName), true)
+        await addGoalKeeperService({ name: getPlayerName(playerName), phoneNumber: playerPhoneNumber }, true)
         return await client.sendText(sender, soldOutExceptionAnswer)
       }
 
-      await addGoalKeeperService(getPlayerName(playerName))
+      await addGoalKeeperService({ name: getPlayerName(playerName), phoneNumber: playerPhoneNumber })
       
       const firstName = getPlayerName(playerName, true);
       const funnyAnswer = getRandomFunSentence(funnyPhrasesOnAdd, firstName);

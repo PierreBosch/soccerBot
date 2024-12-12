@@ -14,8 +14,9 @@ async function addPlayer(message, client) {
       const guestName = message.body.split('|')[1];
       const isGuest = !isEmpty(guestName);
       
-      const playerName = isEmpty(isGuest) ? message.sender.pushname : guestName.trim();  
+      const playerName = isGuest ? guestName.trim() : message.sender.pushname;  
       const sender = message.from;
+      const playerPhoneNumber = !isGuest ?  message.sender.id : null;
 
       const currentPlayersList =  await getPlayers();
       
@@ -28,10 +29,10 @@ async function addPlayer(message, client) {
       if(currentPlayersList.length === 16) {
         const isWaitingList= true;
         
-        await addPlayerService(getPlayerName(playerName), isWaitingList)
+        await addPlayerService({ name: getPlayerName(playerName), phoneNumber: playerPhoneNumber }, isWaitingList)
         return await client.sendText(sender, soldOutExceptionAnswer)
       }
-      await addPlayerService(getPlayerName(playerName))
+      await addPlayerService({ name: getPlayerName(playerName), phoneNumber: playerPhoneNumber })
       
       const firstName = getPlayerName(playerName, true);
       const funnyAnswer = getRandomFunSentence(funnyPhrasesOnAdd, firstName);
