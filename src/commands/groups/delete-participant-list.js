@@ -27,9 +27,20 @@ async function deleteParticipantList(message, client) {
           await participantService.removeParticipant(participant.id)
         
           const { data: participants } = await participantService.getParticipantsList(listId)
-          const participantsTemplate = templateService.getTemplateBeachTennis(participants);
-
-          await client.sendText(groupId, `*${listName}*\n\n${participantsTemplate.trim()}`)
+          
+          // Verificar as regras da lista
+          const listRules = lists[0].rules || {};
+          const participantsTemplate = templateService.getTemplateBeachTennis(participants, listRules);
+          
+          // Preparar mensagem adicional com as regras
+          let mensagemAdicional = "";
+          
+          // Adicionar informação sobre o valor a pagar, se aplicável
+          if(listRules.hasPrice && listRules.price > 0) {
+            mensagemAdicional += `\n\n💰 *Valor a pagar:* R$ ${listRules.price.toFixed(2)}`;
+          }
+          
+          await client.sendText(groupId, `*${listName}*\n\n${participantsTemplate.trim()}${mensagemAdicional}`)
         }
       }
   } catch (error) {

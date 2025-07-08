@@ -13,9 +13,23 @@ async function getParticipantsList(message, client) {
 
         const { data: participants } = await participantsService.getParticipantsList(list.id)
         
-        const participantsTemplate = templateService.getTemplateBeachTennis(participants);
+        const participantsTemplate = templateService.getTemplateBeachTennis(participants, list.rules);
         
-        await client.sendText(groupId, `*${list.name}*\n\n${participantsTemplate.trim()}`)
+        // Verificar as regras da lista
+        const listRules = list.rules || {};
+        let mensagemAdicional = "";
+        
+        // Adicionar informação sobre o limite de participantes, se aplicável
+        if(listRules.hasMaxParticipants) {
+          mensagemAdicional += `\n\n👥 *Limite de participantes:* ${listRules.maxParticipants}`;
+        }
+        
+        // Adicionar informação sobre o valor a pagar, se aplicável
+        if(listRules.hasPrice && listRules.price > 0) {
+          mensagemAdicional += `\n💰 *Valor a pagar:* R$ ${listRules.price.toFixed(2)}`;
+        }
+        
+        await client.sendText(groupId, `*${list.name}*\n\n${participantsTemplate.trim()}${mensagemAdicional}`)
       }
   } catch (error) {
       console.log(error)

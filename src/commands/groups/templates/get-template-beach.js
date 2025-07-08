@@ -1,5 +1,6 @@
-function getTemplateBeachTennis(array) {
-  const limite = 6;
+function getTemplateBeachTennis(array, rules = null) {
+  // Usar o limite das regras ou o padrão de 6
+  const limite = (rules && rules.hasMaxParticipants) ? rules.maxParticipants : 6;
   const lista = [];
 
   for (let i = 0; i < limite; i++) {
@@ -8,10 +9,15 @@ function getTemplateBeachTennis(array) {
     lista.push(`${numero}. 🎾 ${nome}`.trim()); 
   }
 
+  // Texto do limite de participantes
+  const participantsHeaderText = (rules && rules.hasMaxParticipants)
+    ? `*Participantes (Máx: ${rules.maxParticipants})*` 
+    : '*Participantes*';
+
   const header = `
 🗓️ *Dia da semana:* Segunda-feira
-⏰ *Horário:* 21h as 23h
-🏖️ *Quadra:* Andrino 1
+⏰ *Horário:* 19h as 21h
+🏖️ *Quadra:* Andrino
 
 *🤖 Comandos*
 
@@ -21,7 +27,7 @@ _Digite_ \`/vou\` _para participar_
 *Desistir*
 _Digite_ \`/naovou\` _para sair da lista_
 
-*Participantes*
+${participantsHeaderText}
 `;
 
 const footer = `

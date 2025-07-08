@@ -1,5 +1,5 @@
 function getMatchPriceTemplate() {
-  return `💵 R$ 12,00`
+  return `💵 R$ 14,00`
 }
 
 module.exports = getMatchPriceTemplate

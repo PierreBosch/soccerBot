@@ -18,7 +18,7 @@ function getBarbecueList(barbecueList) {
 async function getBarbecueEatersTemplate() {
   const barbecueEaters = await getBarbecueEaters();
 
-  return `*🍖 Churrasco Pós-Futebol*
+  return `*🥩 Churrasco Pós-Futebol*
 
 📅 *Data*: Quarta-feira
 🕢 *Horário*: 20h00

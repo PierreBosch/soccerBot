@@ -13,7 +13,9 @@ async function getDebtors() {
 
 const GENERIC_MESSAGE = 0;
 const PENDING_PAYMENT = 1;
-const THANKFUL_PAYMENT = 2;
+const PENDING_PAYMENT_LATE = 2; 
+const THANKFUL_PAYMENT = 3;
+
 
 async function notifyDebtors(message, client) {
   const senderId = message.sender.id;
@@ -30,6 +32,12 @@ async function notifyDebtors(message, client) {
           await delay(8000);
           break;
         case PENDING_PAYMENT: 
+          if(debtor.paid === false) {
+            await client.sendText(debtor.player.phoneNumber, billingTemplate.replace(/{nome}/g, getPlayerName(debtor.player.name, true)));
+            await delay(8000);
+          }
+          break;
+        case PENDING_PAYMENT_LATE: 
           if(debtor.paid === false) {
             await client.sendText(debtor.player.phoneNumber, billingTemplate.replace(/{nome}/g, getPlayerName(debtor.player.name, true)));
             await delay(8000);

@@ -1,15 +1,15 @@
 const templates = [
-`🎉⚽ Alô, {nome}! ⚽🎉
+`🎉⚽ Fala, {nome}! ⚽🎉
 
-Quarta-feira tá chegando, e é hora de aquecer as chuteiras! 🌟 Vamos acertar os detalhes antes da partida pra garantir que tudo corra liso e a resenha esteja garantida:
+Prepare as chuteiras e deixe tudo pronto pro jogo! 🌟 Aqui estão os detalhes pra organizar tudo certinho:
 
-⚽ Jogo: R$ 12,00
-🥤 Coca-cola: R$ 5,00
-🥩 Churrasco no pós-jogo: R$ 20,00
+⚽ Jogo: R$ 14,00
+🥤 Bebida: R$ 7,00
+🥩 Churrasco pós-jogo: R$ 20,00
 
 💸 Chave PIX: (48) 99674-2125 (Bradesco)
 
-Lembrando que é só mandar um \`/pago\` aqui quando fizer a transferência. Assim, a gente organiza tudo direitinho e só se preocupa com o futebol! 😎
+Assim que fizer a transferência, manda um \`/pago\` aqui pra confirmar. Bora focar no futebol e deixar a resenha garantida! 😎
 
 Abraço,
 Ameixa Bot`,
@@ -18,8 +18,8 @@ Ameixa Bot`,
 Percebemos que você ainda não efetuou o pagamento para o jogo desta semana. Bora regularizar pra garantir sua vaga e aquele pós-jogo? 💸
 
 Aqui estão os valores:
-⚽ Jogo: R$ 12,00
-🥤 Coca-cola: R$ 5,00
+⚽ Jogo: R$ 14,00
+🥤 Coca-cola: R$ 7,00
 🥩 Churrasco no pós-jogo: R$ 20,00
 
 💸 Chave PIX: (48) 99674-2125 (Bradesco)
@@ -28,11 +28,28 @@ Não deixe de mandar um \`/pago\` assim que realizar o pagamento. Contamos com v
 
 Abraço,
 Ameixa Bot`,
-`🎉🙌 Obrigado, {nome}! 🙌🎉
+`🚨⚽ Fala, {nome}! ⚽🚨
 
-Recebemos seu pagamento e estamos prontos pra mais uma partida épica! ⚽🔥
+Passando aqui pra lembrar que seu pagamento ainda está pendente. Bora acertar isso pra fechar a rodada certinho? 💸
 
-Prepare-se para brilhar nos gramados e curtir a resenha se você ficou para o pós-jogo! 🌟 Até quarta-feira, e que venha mais uma semana de futebol e diversão!
+Aqui estão os valores:
+⚽ Jogo: R$ 14,00
+🥤 Bebida: R$ 7,00
+🥩 Churrasco: R$ 20,00
+
+💸 Chave PIX: (48) 99674-2125 (Bradesco)
+
+Assim que fizer a transferência, manda um \`/pago\` aqui pra gente registrar. Valeu pela parceria e até o próximo jogo! ⚽🔥
+
+Abraço,
+Ameixa Bot`,
+`🎉🙌 Valeu, {nome}! 🙌🎉
+
+Pagamento confirmado! ⚽🔥
+
+Mais uma semana garantida com jogos, resenhas e diversão. 
+
+Que venha a próxima rodada épica nos gramados! 🌟
 
 Abraço,
 Ameixa Bot`,
