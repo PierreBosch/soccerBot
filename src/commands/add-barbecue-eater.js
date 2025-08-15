@@ -10,13 +10,13 @@ const addCokeToBarbecueEater = require('../http/add-coke-to-barbecue-eater');
 
 const barbecueEaterAlreadyExistsException = "Você já está na lista do churrasco, seu nome não pode ser adicionado mais de uma vez"
 
-async function addBarbecueEater(message, client) {
+async function addBarbecueEater(message, client, args = {}) {
   try {
       const senderId = message.sender.id;
       const playerName = message.sender.pushname;
       const sender = message.from;
 
-      const [,,addCoke] = message.body.split('-') 
+      const addCoke = message.body.split('-')[2] ?? args?.coca;
       const stayForCoke = !!addCoke 
 
       const [,barbecueEaterGuest] = message.body.split("|")

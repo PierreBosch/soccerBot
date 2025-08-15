@@ -3,15 +3,16 @@ const isAdmin = require('../permissions');
 const getPlayerName = require('../util/extract-first-and-last-name');
 const getBarbecueEaters = require('./get-barbecue-eaters');
 
-async function deleteBarbecueEater(message, client) {
+async function deleteBarbecueEater(message, client, args = {}) {
   try {
     const playerName = message.sender.pushname;
     const senderId = message.sender.id;
 
-    const [,barbecueEaterGuest] = message.body.split("|")
+    const barbecueEaterGuest = message.body.split("|")[1] ?? args?.nome;
+    const guestName = message.body.split('|')[1] ?? args?.nome;
 
     if(isAdmin(senderId) && !!barbecueEaterGuest) {
-      await deleteBarbecueEaterService(getPlayerName(barbecueEaterGuest))
+      await deleteBarbecueEaterService(getPlayerName(guestName))
     } else {
       await deleteBarbecueEaterService(getPlayerName(playerName));
     }

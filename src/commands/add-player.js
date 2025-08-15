@@ -9,9 +9,9 @@ const { isEmpty } = require('lodash');
 const soldOutExceptionAnswer = 'A lista com 16 jogadores já está completa, você foi colocado na lista de espera'
 const playerAlreadyExistsException = 'Você já está na lista do futebol, seu nome não pode ser adicionado mais de uma vez'
 
-async function addPlayer(message, client) {
+async function addPlayer(message, client, args = {}) {
   try {
-      const guestName = message.body.split('|')[1];
+      const guestName = message.body.split('|')[1] ?? args?.nome;
       const isGuest = !isEmpty(guestName);
       
       const playerName = isGuest ? guestName.trim() : message.sender.pushname;  

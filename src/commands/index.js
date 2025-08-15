@@ -38,6 +38,8 @@ const setScore = require('./set-score');
 
 const fetch = require('node-fetch');
 const cron = require('node-cron');
+const onGroupMention = require('../middlewares/on-group-mention');
+const sendPlayersMessages = require('./send-players-messages');
 
 const commands = ({
   '/add': isInAllowedPeriod(addPlayer),
@@ -82,6 +84,7 @@ const commands = ({
   '/controle-placar': getLinkScoreControl,
   '/convidar-churras': createInviteBarbecue,
   '/placar': setScore,
+  '/enviar-convite': sendPlayersMessages,
 })
 
 
@@ -161,7 +164,9 @@ function start(client) {
             break;
         }
       }
-      
+
+      onGroupMention(client, message);
+
       const [command] = message.body.toLowerCase().split(' ');
       
       if(command.trim().startsWith('/')) {

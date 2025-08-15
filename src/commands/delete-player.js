@@ -5,9 +5,9 @@ const funnyPhrasesOnLeave = require('../sentences/funny-on-leave');
 const getRandomFunSentence = require('../util/get-random-fun-sentence');
 const { isEmpty } = require('lodash');
 
-async function deletePlayer(message, client) {
+async function deletePlayer(message, client, args = {}) {
   try {
-    const guestName = message.body.split('|')[1];
+    const guestName = message.body.split('|')[1] ?? args?.nome;
     const isGuest = !isEmpty(guestName);
     
     const playerName = isGuest ? guestName.trim() : message.sender.pushname;  
