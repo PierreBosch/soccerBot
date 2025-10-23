@@ -20,4 +20,4 @@ COPY . .
 
 EXPOSE 3000 3001
 
-CMD ["pm2-runtime", "restart", "ecosystem.config.js"]
+CMD ["pm2-runtime", "ecosystem.config.js"]
