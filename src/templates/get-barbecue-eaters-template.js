@@ -18,7 +18,7 @@ function getBarbecueList(barbecueList) {
 async function getBarbecueEatersTemplate() {
   const barbecueEaters = await getBarbecueEaters();
 
-  return `*🍖 Churrasco Pós-Futebol*
+  return `*🥩 Churrasco Pós-Futebol*
 
 📅 *Data*: Quarta-feira
 🕢 *Horário*: 20h00
@@ -30,7 +30,7 @@ ${getBarbecueList(barbecueEaters).trim()}
 
 *💰Pagamento antecipado*
 
-Chave (48) 99674-2125 (Bradesco)
+Chave (48) 99674-2125 (🟠 Banco Inter)
 
 _Contamos com a presença de todos_`;
 }

@@ -4,11 +4,11 @@ const createDebtorsService = require('../http/create-debtors-list');
 const isAdmin = require('../permissions');
 const getDebtorsList = require('./get-debtors-list');
 
-async function createDebtorsList(message, client) {
+async function createDebtorsList(message, client, byPassAdmin = false) {
   const sender = message.from;
   const senderId = message.sender.id;
 
-  if(!isAdmin(senderId)) {
+  if(!isAdmin(senderId) && !byPassAdmin) {
     return await client.sendText(sender, 'Somente admins podem criar a lista de pagantes')
   }
 
@@ -22,7 +22,9 @@ async function createDebtorsList(message, client) {
 
   await createDebtorsService(debtorsList)
 
-  await getDebtorsList(message,client, true)
+  if(!byPassAdmin) {
+    await getDebtorsList(message,client, true)
+  }
 }
 
 module.exports = createDebtorsList

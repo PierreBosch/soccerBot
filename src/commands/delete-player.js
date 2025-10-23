@@ -3,10 +3,14 @@ const deletePlayerService = require('../http/delete-player');
 const getSoccerList = require('./get-soccer-list');
 const funnyPhrasesOnLeave = require('../sentences/funny-on-leave');
 const getRandomFunSentence = require('../util/get-random-fun-sentence');
+const { isEmpty } = require('lodash');
 
-async function deletePlayer(message, client) {
+async function deletePlayer(message, client, args = {}) {
   try {
-    const playerName = message.sender.pushname;
+    const guestName = message.body.split('|')[1] ?? args?.nome;
+    const isGuest = !isEmpty(guestName);
+    
+    const playerName = isGuest ? guestName.trim() : message.sender.pushname;  
     const sender = message.from;
 
     await deletePlayerService(getPlayerName(playerName));

@@ -4,22 +4,27 @@ const getPlayerName = require('../util/extract-first-and-last-name');
 const getSoccerListTemplate = require('../templates/get-soccer-list-template');
 const getRandomFunSentence = require('../util/get-random-fun-sentence');
 const funnyPhrasesOnAdd = require('../sentences/funny-on-add-gk');
+const isEmpty = require('lodash/isEmpty');
 
 const soldOutExceptionAnswer = 'A lista com 2 goleiros já está completa, você foi colocado na lista de espera'
 
 async function addGoalKeeper(message, client) {
   try {
-      const playerName = message.sender.pushname;
+      const guestName = message.body.split('|')[1];
+      const isGuest = !isEmpty(guestName);
+
+      const playerName = isGuest ? guestName.trim() : message.sender.pushname;  
       const sender = message.from;
+      const playerPhoneNumber = !isGuest ?  message.sender.id : null;
       
       const currentGoalKeepersList =  await getGoalKeepers();
 
       if(currentGoalKeepersList.length === 2) {
-        await addGoalKeeperService(getPlayerName(playerName), true)
+        await addGoalKeeperService({ name: getPlayerName(playerName), phoneNumber: playerPhoneNumber }, true)
         return await client.sendText(sender, soldOutExceptionAnswer)
       }
 
-      await addGoalKeeperService(getPlayerName(playerName))
+      await addGoalKeeperService({ name: getPlayerName(playerName), phoneNumber: playerPhoneNumber })
       
       const firstName = getPlayerName(playerName, true);
       const funnyAnswer = getRandomFunSentence(funnyPhrasesOnAdd, firstName);

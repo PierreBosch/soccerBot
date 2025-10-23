@@ -1,5 +1,5 @@
 function getCokePriceTemplate() {
-  return `💵 R$ 5,00`
+  return `💵 R$ 7,00`
 }
 
 module.exports = getCokePriceTemplate

@@ -12,10 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wppconnect-team/wppconnect": "^1.33.0",
+    "@raycast/api": "^1.93.2",
+    "@wppconnect-team/wppconnect": "^1.35.0",
     "axios": "^1.7.2",
     "json-server": "^1.0.0-beta.1",
     "lodash": "^4.17.21",
+    "node-cron": "^4.1.0",
+    "node-fetch": "^2.7.0",
+    "openai": "^5.10.0",
     "sharp": "^0.33.4"
   },
   "devDependencies": {

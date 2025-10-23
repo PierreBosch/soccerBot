@@ -1,7 +1,7 @@
 async function getLineup(message, client) {
   const sender = message.from;
 
-  const imageUrl = 'https://i.ibb.co/PDcRLCN/Escalacao-13.png'
+  const imageUrl = 'https://i.ibb.co/TGpMvkC/Escalacao-9.png'
 
   try {
     await client.sendImage(sender, imageUrl)
