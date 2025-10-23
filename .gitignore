@@ -1,7 +1,6 @@
 node_modules
 tokens
 out.png
-db.json
 .env
 .env
 */.env
