@@ -7,7 +7,7 @@ Prepare as chuteiras e deixe tudo pronto pro jogo! 🌟 Aqui estão os detalhes 
 🥤 Bebida: R$ 7,00
 🥩 Churrasco pós-jogo: R$ 20,00
 
-💸 Chave PIX: (48) 99674-2125 (Bradesco)
+💸 Chave PIX: (48) 99674-2125 (🟠 Banco Inter)
 
 Assim que fizer a transferência, manda um \`/pago\` aqui pra confirmar. Bora focar no futebol e deixar a resenha garantida! 😎
 
@@ -22,7 +22,7 @@ Aqui estão os valores:
 🥤 Coca-cola: R$ 7,00
 🥩 Churrasco no pós-jogo: R$ 20,00
 
-💸 Chave PIX: (48) 99674-2125 (Bradesco)
+💸 Chave PIX: (48) 99674-2125 (🟠 Banco Inter)
 
 Não deixe de mandar um \`/pago\` assim que realizar o pagamento. Contamos com você pra fazer desse jogo mais um sucesso! 🚀
 
@@ -37,7 +37,7 @@ Aqui estão os valores:
 🥤 Bebida: R$ 7,00
 🥩 Churrasco: R$ 20,00
 
-💸 Chave PIX: (48) 99674-2125 (Bradesco)
+💸 Chave PIX: (48) 99674-2125 (🟠 Banco Inter)
 
 Assim que fizer a transferência, manda um \`/pago\` aqui pra gente registrar. Valeu pela parceria e até o próximo jogo! ⚽🔥
 

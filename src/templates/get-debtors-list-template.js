@@ -31,7 +31,8 @@ async function getDebtorsListTemplate() {
 
   return `*💰 Pagamentos Futebol e Pós*
 
-Chave (48) 99674-2125 (Bradesco)
+*🟠 Banco Inter*\n
+Chave (48) 99674-2125 
 
 ${getDebtorsList(debtors).trim()}
 

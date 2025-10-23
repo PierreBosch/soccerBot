@@ -30,7 +30,7 @@ ${getBarbecueList(barbecueEaters).trim()}
 
 *💰Pagamento antecipado*
 
-Chave (48) 99674-2125 (Bradesco)
+Chave (48) 99674-2125 (🟠 Banco Inter)
 
 _Contamos com a presença de todos_`;
 }
