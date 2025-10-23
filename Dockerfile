@@ -1,6 +1,6 @@
 FROM node:22
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 RUN apt-get update && apt-get install -y \
   curl gnupg ca-certificates fonts-liberation libxss1 libappindicator3-1 libatk-bridge2.0-0 libgtk-3-0 libx11-xcb1 libdrm2 libgbm1 libasound2 libnss3 libxshmfence1 libxcursor1 libxrandr2 libxcomposite1 libxdamage1 libatk1.0-0 libpango-1.0-0 libpangocairo-1.0-0 wget \
