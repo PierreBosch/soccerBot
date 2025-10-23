@@ -35,7 +35,7 @@ function onGroupMention(client, message) {
           if (wasMentioned) {
            
             const openai = new OpenAI({
-              apiKey: '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'
+              apiKey: process.env.OPENAI_API_KEY
             });
 
             openai.chat.completions.create({
