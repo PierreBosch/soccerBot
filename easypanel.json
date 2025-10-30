@@ -1,0 +1,63 @@
+{
+  "name": "soccerbot",
+  "description": "Bot de WhatsApp para gerenciar jogos de futebol society",
+  "build": {
+    "method": "dockerfile",
+    "dockerfile": "./Dockerfile",
+    "context": "."
+  },
+  "deploy": {
+    "replicas": 1,
+    "restart": "unless-stopped"
+  },
+  "ports": [
+    {
+      "container": 3000,
+      "protocol": "http",
+      "public": true
+    },
+    {
+      "container": 3001,
+      "protocol": "http",
+      "public": true
+    }
+  ],
+  "volumes": [
+    {
+      "name": "soccerbot-tokens",
+      "mount": "/usr/src/app/tokens",
+      "description": "Sessão do WhatsApp (tokens de autenticação)"
+    },
+    {
+      "name": "soccerbot-db",
+      "mount": "/usr/src/app/db.json",
+      "description": "Banco de dados JSON"
+    },
+    {
+      "name": "soccerbot-qr",
+      "mount": "/usr/src/app/out.png",
+      "description": "Imagem do QR Code para login"
+    }
+  ],
+  "env": [
+    {
+      "key": "NODE_ENV",
+      "value": "production"
+    },
+    {
+      "key": "OPENAI_API_KEY",
+      "value": "",
+      "required": true,
+      "description": "Chave da API OpenAI (obtenha em: https://platform.openai.com/api-keys)"
+    }
+  ],
+  "resources": {
+    "cpu": "1",
+    "memory": "1Gi",
+    "disk": "2Gi"
+  },
+  "healthcheck": {
+    "enabled": false
+  }
+}
+
