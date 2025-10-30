@@ -9,7 +9,12 @@ module.exports = {
       watch: false,
       autorestart: true,
       env: {
-        OPENAI_API_KEY: process.env.OPENAI_API_KEY
+        OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+        EVOLUTION_API_URL: process.env.EVOLUTION_API_URL,
+        EVOLUTION_API_KEY: process.env.EVOLUTION_API_KEY,
+        EVOLUTION_INSTANCE_NAME: process.env.EVOLUTION_INSTANCE_NAME,
+        WEBHOOK_URL: process.env.WEBHOOK_URL,
+        PORT: process.env.PORT || 3000
       }
     },
     {

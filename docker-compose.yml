@@ -9,17 +9,11 @@ services:
       - "3000:3000"
       - "3001:3001"
     volumes:
-      # Volume para persistir tokens do WhatsApp (sessão)
-      - ./tokens:/usr/src/app/tokens
-      
       # Volume para persistir banco de dados JSON
       - ./db.json:/usr/src/app/db.json
       
       # Volume para persistir arquivo .env (variáveis de ambiente)
       - ./.env:/usr/src/app/.env:ro
-      
-      # Volume para persistir imagens geradas (QR code, etc)
-      - ./out.png:/usr/src/app/out.png
     environment:
       - NODE_ENV=production
     networks:
