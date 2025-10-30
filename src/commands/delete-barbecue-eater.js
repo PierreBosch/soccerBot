@@ -8,8 +8,8 @@ async function deleteBarbecueEater(message, client, args = {}) {
     const playerName = message.sender.pushname;
     const senderId = message.sender.id;
 
-    const barbecueEaterGuest = message.body.split("|")[1] ?? args?.nome;
-    const guestName = message.body.split('|')[1] ?? args?.nome;
+    const barbecueEaterGuest = message.body.split("|")[1]?.trim() ?? args?.nome;
+    const guestName = message.body.split('|')[1]?.trim() ?? args?.nome;
 
     if(isAdmin(senderId) && !!barbecueEaterGuest) {
       await deleteBarbecueEaterService(getPlayerName(guestName))

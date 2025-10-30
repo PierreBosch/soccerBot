@@ -15,7 +15,7 @@ async function clearDebt(message, client) {
   const billingTemplate = getBillingTemplate(3);
 
   try {
-    const [,debtorName] = message.body.split("|")
+    const [,debtorName] = message.body.split("|").map(s => s.trim())
 
     const byPassAdmin = true;
     await createDebtorsList(message, client, byPassAdmin);

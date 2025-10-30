@@ -19,7 +19,7 @@ async function addBarbecueEater(message, client, args = {}) {
       const addCoke = message.body.split('-')[2] ?? args?.coca;
       const stayForCoke = !!addCoke 
 
-      const [,barbecueEaterGuest] = message.body.split("|")
+      const [,barbecueEaterGuest] = message.body.split("|").map(s => s.trim())
 
       const barbecueEaters = await getBarbecueEaters();
 
