@@ -7,8 +7,9 @@ out.png
 .env.*
 *.env
 
-# Banco de dados local (não commitar dados de produção)
-# db.json
+# Banco de dados local
+# Nota: db.json é commitado como template inicial
+# Dados de produção são mantidos via volumes Docker
 
 # Docker
 docker-compose.override.yml

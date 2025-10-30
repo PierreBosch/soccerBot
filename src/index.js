@@ -2,6 +2,31 @@
 
 const start = require('./commands')
 const wppconnect = require('@wppconnect-team/wppconnect');
+const axios = require('axios');
+
+// Função para aguardar o JSON Server estar pronto
+async function waitForJSONServer() {
+    const maxRetries = 30;
+    let retries = 0;
+    
+    console.log('🔍 Aguardando JSON Server iniciar...');
+    
+    while (retries < maxRetries) {
+        try {
+            await axios.get('http://localhost:3001');
+            console.log('✅ JSON Server conectado com sucesso!');
+            return true;
+        } catch (error) {
+            retries++;
+            if (retries % 5 === 0) {
+                console.log(`⏳ Aguardando JSON Server... (${retries}/${maxRetries})`);
+            }
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+    }
+    
+    throw new Error('❌ JSON Server não iniciou a tempo! Verifique se o processo futebot-db está rodando.');
+}
 
 wppconnect
     .create({
@@ -26,6 +51,10 @@ wppconnect
     },
     logQR: false,
 })
-    .then((client) => start(client))
+    .then(async (client) => {
+        // Aguardar JSON Server antes de iniciar os comandos
+        await waitForJSONServer();
+        return start(client);
+    })
     .catch((error) => console.log(error));
 

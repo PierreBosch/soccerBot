@@ -1,10 +1,9 @@
 {
-  "whatsappGroups": [],
-  "lists": [],
-  "participants": [],
-  "barbecueEaters": [],
-  "billingPhones": [],
   "players": [],
   "goalKeepers": [],
-  "debtors": []
+  "barbecueEaters": [],
+  "debtors": [],
+  "groups": [],
+  "lists": [],
+  "participants": []
 }
