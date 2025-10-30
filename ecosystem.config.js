@@ -1,3 +1,13 @@
+/**
+ * ⚠️  DEPRECADO - Este arquivo está mantido apenas para compatibilidade com desenvolvimento local
+ * 
+ * Para produção, use Docker Compose ao invés de PM2:
+ * - docker-compose up -d
+ * - Consulte DOCKER_COMPOSE_GUIDE.md para mais informações
+ * 
+ * PM2 foi removido do Dockerfile e não é mais usado em containers.
+ */
+
 require('dotenv').config();
 
 module.exports = {

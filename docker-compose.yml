@@ -1,21 +1,51 @@
 version: '3.8'
 
 services:
-  soccerbot:
-    build: .
-    container_name: soccerbot
+  # JSON Server - Banco de dados
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    container_name: soccerbot-db
     restart: unless-stopped
     ports:
-      - "3000:3000"
       - "3001:3001"
     volumes:
       # Volume para persistir banco de dados JSON
       - ./db.json:/usr/src/app/db.json
-      
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks:
+      - soccerbot-network
+
+  # FuteBot - Servidor Express
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: soccerbot-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
       # Volume para persistir arquivo .env (variáveis de ambiente)
       - ./.env:/usr/src/app/.env:ro
     environment:
       - NODE_ENV=production
+      - JSON_SERVER_URL=http://db:3001
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     networks:
       - soccerbot-network
 

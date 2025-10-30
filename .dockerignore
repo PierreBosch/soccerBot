@@ -11,5 +11,4 @@ db.json
 
 # Arquivos de documentação (opcional)
 *.md
-!CONFIGURACAO_OPENAI.md
-!EVOLUTION_API_MIGRATION.md
+docs/

@@ -1,16 +1,19 @@
 FROM node:22
 
 # Não precisa mais do Chrome/Puppeteer pois usamos Evolution API
-# RUN apt-get update && apt-get install -y ...
+# Não precisa mais do PM2 pois usamos Docker Compose para orquestração
 
 WORKDIR /usr/src/app
 
+# Copiar package.json e instalar dependências
 COPY package*.json ./
 RUN npm install
-RUN npm install pm2 -g
 
+# Copiar código fonte
 COPY . .
 
-EXPOSE 3000 3001
+# Expor porta do servidor Express
+EXPOSE 3000
 
-CMD ["pm2-runtime", "ecosystem.config.js"]
+# Executar servidor diretamente com Node
+CMD ["node", "src/server.js"]

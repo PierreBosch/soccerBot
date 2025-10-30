@@ -20,16 +20,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Cliente Evolution API
 let evolutionClient;
 
+// URL do JSON Server (dinâmica para Docker ou local)
+const JSON_SERVER_URL = process.env.JSON_SERVER_URL || 'http://localhost:3001';
+
 // Função para aguardar o JSON Server estar pronto
 async function waitForJSONServer() {
     const maxRetries = 30;
     let retries = 0;
     
-    console.log('🔍 Aguardando JSON Server iniciar...');
+    console.log(`🔍 Aguardando JSON Server iniciar em ${JSON_SERVER_URL}...`);
     
     while (retries < maxRetries) {
         try {
-            await axios.get('http://localhost:3001');
+            await axios.get(JSON_SERVER_URL);
             console.log('✅ JSON Server conectado com sucesso!');
             return true;
         } catch (error) {
@@ -41,7 +44,7 @@ async function waitForJSONServer() {
         }
     }
     
-    throw new Error('❌ JSON Server não iniciou a tempo! Verifique se o processo futebot-db está rodando.');
+    throw new Error(`❌ JSON Server não iniciou a tempo em ${JSON_SERVER_URL}! Verifique se o serviço está rodando.`);
 }
 
 // Health check
