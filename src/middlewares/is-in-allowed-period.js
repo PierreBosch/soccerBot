@@ -1,3 +1,5 @@
+const isAdmin = require('../permissions');
+
 function timePeriodNotAllowedError(mensagem) {
   const erro = new Error(mensagem);
   erro.name = "TimePeriodNotAllowedError";
@@ -7,6 +9,12 @@ function timePeriodNotAllowedError(mensagem) {
 function isInAllowedPeriod(fn) {
   return async function(...args) {
     const [message, client] = args;
+    const senderId = message.sender.id;
+
+    // Admins podem adicionar jogadores a qualquer momento
+    if (isAdmin(senderId)) {
+      return fn(...args);
+    }
 
     const now = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Sao_Paulo"}));
     const weekDay = now.getDay(); 

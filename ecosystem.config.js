@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   apps: [
     {
@@ -5,7 +7,10 @@ module.exports = {
       script: "npm",
       args: "run start",
       watch: false,
-      autorestart: true,     
+      autorestart: true,
+      env: {
+        OPENAI_API_KEY: process.env.OPENAI_API_KEY
+      }
     },
     {
       name: "futebot-db",

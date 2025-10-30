@@ -22,7 +22,7 @@ async function createDebtorsList(debtors) {
       soccer: !!foundInSoccerList,
       barbecue: !!foundBarbecueList,
       coke: !!foundBarbecueList ? foundBarbecueList.stayForCoke : false,
-      playerId: foundInSoccerList.id
+      playerId: foundInSoccerList?.id || null
     }
 
     return await api.post('/debtors', { ...debtor })
