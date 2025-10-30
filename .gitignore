@@ -6,3 +6,27 @@ out.png
 */.env
 .env.*
 *.env
+
+# Banco de dados local (não commitar dados de produção)
+# db.json
+
+# Docker
+docker-compose.override.yml
+
+# Backups
+backups/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
