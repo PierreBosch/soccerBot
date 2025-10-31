@@ -99,6 +99,27 @@ class EvolutionClient {
   }
 
   /**
+   * Envia link com preview
+   * @param {string} to - Número do destinatário
+   * @param {string} url - URL do link
+   * @param {string} text - Texto opcional para acompanhar o link
+   */
+  async sendLinkPreview(to, url, text = '') {
+    try {
+      // Na Evolution API, enviamos o link como texto normal
+      // O WhatsApp gera o preview automaticamente
+      const message = text ? `${text}\n\n${url}` : url;
+      
+      console.log('🔗 Enviando link com preview:', { to, url });
+      
+      return await this.sendText(to, message);
+    } catch (error) {
+      console.error('❌ Erro ao enviar link:', error.message);
+      throw error;
+    }
+  }
+
+  /**
    * Envia mensagem com lista interativa
    * @param {string} to - Número do destinatário
    * @param {object} options - Opções da lista

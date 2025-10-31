@@ -106,6 +106,23 @@ class ClientAdapter {
   }
 
   /**
+   * Envia link com preview
+   * Interface compatível com wppconnect: client.sendLinkPreview(to, url, text)
+   */
+  async sendLinkPreview(to, url, text = '') {
+    try {
+      const normalizedTo = this.evolutionClient.normalizeNumber(to);
+      
+      console.log('📤 ClientAdapter.sendLinkPreview:', { to: normalizedTo, url });
+      
+      return await this.evolutionClient.sendLinkPreview(normalizedTo, url, text);
+    } catch (error) {
+      console.error('❌ Erro no ClientAdapter.sendLinkPreview:', error.message);
+      throw error;
+    }
+  }
+
+  /**
    * Envia enquete (poll)
    * Interface compatível com wppconnect: client.sendPoll(to, name, options)
    */
