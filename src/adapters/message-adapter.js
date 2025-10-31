@@ -106,6 +106,18 @@ function adaptEvolutionMessage(webhookData) {
   const mentions = extractMentions(data);
   const isGroup = isGroupMessage(key.remoteJid);
   
+  // Em grupos, o participant é o remetente real
+  // Em conversas privadas, o remoteJid é o remetente
+  const senderId = key.participant || key.remoteJid;
+  
+  console.log('📋 Adaptando mensagem:', {
+    isGroup,
+    remoteJid: key.remoteJid,
+    participant: key.participant,
+    senderId,
+    body: body?.substring(0, 50)
+  });
+  
   // Formato compatível com wppconnect
   const adaptedMessage = {
     // Identificação
@@ -113,12 +125,15 @@ function adaptEvolutionMessage(webhookData) {
     from: key.remoteJid,
     to: key.remoteJid,
     
-    // Remetente
+    // Remetente (compatibilidade com wppconnect)
     sender: {
-      id: key.participant || key.remoteJid,
+      id: senderId,
       pushname: pushName || 'Desconhecido',
       name: pushName || 'Desconhecido'
     },
+    
+    // Author (para comandos que usam message.author)
+    author: senderId,
     
     // Conteúdo
     body: body,

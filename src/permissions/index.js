@@ -32,16 +32,37 @@ console.log('👥 Administradores configurados:', admins.length);
  * @returns {boolean}
  */
 function isAdmin(phoneId) {
-  if (!phoneId) return false;
+  if (!phoneId) {
+    console.log('⚠️  isAdmin: phoneId vazio');
+    return false;
+  }
   
   // Normalizar o número para comparação
-  const normalizedPhone = phoneId.replace(/@c\.us|@s\.whatsapp\.net|@g\.us/g, '');
+  const normalizedPhone = phoneId.replace(/@c\.us|@s\.whatsapp\.net|@g\.us|@lid/g, '');
+  
+  console.log('🔐 Verificando admin:', {
+    phoneId,
+    normalizedPhone,
+    adminsCount: admins.length
+  });
   
   // Verificar se o número está na lista de admins (com ou sem sufixo)
-  return admins.some(admin => {
+  const isAdminUser = admins.some(admin => {
     const normalizedAdmin = admin.replace(/@c\.us|@s\.whatsapp\.net|@lid|@g\.us/g, '');
-    return normalizedPhone === normalizedAdmin || phoneId === admin;
+    const match = normalizedPhone === normalizedAdmin || phoneId === admin;
+    
+    if (match) {
+      console.log('✅ Admin encontrado:', { phoneId, admin });
+    }
+    
+    return match;
   });
+  
+  if (!isAdminUser) {
+    console.log('❌ Não é admin:', { phoneId, normalizedPhone });
+  }
+  
+  return isAdminUser;
 }
 
 module.exports = isAdmin;
