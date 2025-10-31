@@ -7,10 +7,8 @@ README.md
 .DS_Store
 
 # Não copiar para a imagem - serão montados como volumes
-tokens/
 db.json
-out.png
 
 # Arquivos de documentação (opcional)
 *.md
-!CONFIGURACAO_OPENAI.md
+docs/

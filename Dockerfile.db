@@ -1,0 +1,18 @@
+FROM node:22-alpine
+
+WORKDIR /usr/src/app
+
+# Instalar json-server globalmente
+RUN npm install -g json-server@1.0.0-beta.1
+
+# Criar db.json inicial
+RUN echo '{"players":[],"goalKeepers":[],"barbecueEaters":[],"debtors":[],"groups":[],"lists":[],"participants":[]}' > db.json
+
+# Dar permissões corretas
+RUN chmod 666 db.json
+
+EXPOSE 3001
+
+# Iniciar json-server
+CMD ["json-server", "db.json", "--host", "0.0.0.0", "--port", "3001"]
+

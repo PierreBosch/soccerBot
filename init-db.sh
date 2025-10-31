@@ -15,7 +15,7 @@ if [ ! -f "$DB_FILE" ]; then
   "goalKeepers": [],
   "barbecueEaters": [],
   "debtors": [],
-  "groups": [],
+  "whatsappGroups": [],
   "lists": [],
   "participants": []
 }
