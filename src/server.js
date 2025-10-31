@@ -3,7 +3,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const start = require('./commands');
 const EvolutionClient = require('./services/evolution-client');
 const { adaptEvolutionMessage, isValidWebhook } = require('./adapters/message-adapter');
 
@@ -22,6 +21,71 @@ let evolutionClient;
 
 // URL do JSON Server (dinâmica para Docker ou local)
 const JSON_SERVER_URL = process.env.JSON_SERVER_URL || 'http://localhost:3001';
+
+// Função para processar mensagens recebidas
+async function processMessage(message, client) {
+    try {
+        // Importar módulos necessários dinamicamente
+        const onGroupMention = require('./middlewares/on-group-mention');
+        const addBarbecueEater = require('./commands/add-barbecue-eater');
+        
+        // Ativar/Desativar placar (mantido do start original)
+        if (message.body && message.body.toLowerCase() === 'ativar placar') {
+            console.log('Comando ativar placar recebido');
+            await client.sendText(message.from, 'Atualização automática do placar ATIVADA!');
+            return;
+        }
+
+        if (message.body && message.body.toLowerCase() === 'desativar placar') {
+            console.log('Comando desativar placar recebido');
+            await client.sendText(message.from, 'Atualização automática do placar DESATIVADA!');
+            return;
+        }
+
+        // Processar lista interativa
+        if (message.type === 'list_response' && message.listResponse) {
+            const selectedRowId = message.listResponse.singleSelectReply?.selectedRowId;
+            console.log('Lista selecionada:', selectedRowId);
+            
+            switch (selectedRowId) {
+                case 'add-churras-coca':
+                    await addBarbecueEater({...message, body: '/add-churras-coca'}, client);
+                    break;
+                case 'add-churras':
+                    await addBarbecueEater({...message, body: '/add-churras'}, client);
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
+
+        // Processar menções no grupo
+        await onGroupMention(client, message);
+
+        // Processar comandos que começam com /
+        if (message.body) {
+            const [command] = message.body.toLowerCase().split(' ');
+            
+            if (command.trim().startsWith('/')) {
+                const commands = require('./commands');
+                const executeCommand = commands.executeCommand || function(cmd, msg, cli) {
+                    // Fallback: importar e executar comando diretamente
+                    try {
+                        const commandModule = require(`./commands${cmd}`);
+                        return commandModule(msg, cli);
+                    } catch (err) {
+                        console.error(`Comando ${cmd} não encontrado:`, err.message);
+                    }
+                };
+                
+                await executeCommand(command, message, client);
+            }
+        }
+    } catch (error) {
+        console.error('❌ Erro ao processar mensagem:', error);
+    }
+}
 
 // Função para aguardar o JSON Server estar pronto
 async function waitForJSONServer() {
@@ -86,7 +150,7 @@ app.post('/webhook/evolution', async (req, res) => {
         
         // Processar mensagem através do sistema de comandos
         if (evolutionClient) {
-            await evolutionClient.processWebhookMessage(adaptedMessage);
+            await processMessage(adaptedMessage, evolutionClient);
         } else {
             console.error('❌ Cliente Evolution não inicializado!');
         }
@@ -137,10 +201,8 @@ async function initializeServer() {
         evolutionClient = new EvolutionClient();
         console.log('✅ Cliente Evolution API inicializado');
         
-        // Registrar callback de mensagens
-        evolutionClient.onMessage(async (message) => {
-            await start(evolutionClient)(message);
-        });
+        // Com Evolution API, não precisamos registrar onMessage
+        // As mensagens chegam via webhook
         
         // Iniciar servidor HTTP
         app.listen(PORT, () => {
