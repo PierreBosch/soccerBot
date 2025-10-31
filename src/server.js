@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const EvolutionClient = require('./services/evolution-client');
+const ClientAdapter = require('./adapters/client-adapter');
 const { adaptEvolutionMessage, isValidWebhook } = require('./adapters/message-adapter');
 
 // Carregar variáveis de ambiente
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Cliente Evolution API
 let evolutionClient;
+let clientAdapter; // Adapter compatível com wppconnect
 
 // URL do JSON Server (dinâmica para Docker ou local)
 const JSON_SERVER_URL = process.env.JSON_SERVER_URL || 'http://localhost:3001';
@@ -141,19 +143,20 @@ app.post('/webhook/evolution', async (req, res) => {
             return res.status(200).json({ message: 'Message ignored' });
         }
         
-        console.log('✅ Mensagem adaptada:', {
-            from: adaptedMessage.from,
-            body: adaptedMessage.body,
-            type: adaptedMessage.type,
-            isGroup: adaptedMessage.isGroupMsg
-        });
-        
-        // Processar mensagem através do sistema de comandos
-        if (evolutionClient) {
-            await processMessage(adaptedMessage, evolutionClient);
-        } else {
-            console.error('❌ Cliente Evolution não inicializado!');
-        }
+               console.log('✅ Mensagem adaptada:', {
+                   from: adaptedMessage.from,
+                   body: adaptedMessage.body,
+                   type: adaptedMessage.type,
+                   isGroup: adaptedMessage.isGroupMsg
+               });
+
+               // Processar mensagem através do sistema de comandos
+               // Usa clientAdapter para manter compatibilidade com comandos wppconnect
+               if (clientAdapter) {
+                   await processMessage(adaptedMessage, clientAdapter);
+               } else {
+                   console.error('❌ ClientAdapter não inicializado!');
+               }
         
         // Responder rapidamente ao webhook
         res.status(200).json({ 
@@ -180,8 +183,8 @@ app.post('/test/send', async (req, res) => {
             return res.status(400).json({ error: 'Parâmetros "to" e "message" são obrigatórios' });
         }
         
-        const result = await evolutionClient.sendText(to, message);
-        res.json({ success: true, result });
+               const result = await clientAdapter.sendText(to, message);
+               res.json({ success: true, result });
         
     } catch (error) {
         console.error('❌ Erro ao enviar mensagem de teste:', error);
@@ -197,9 +200,13 @@ async function initializeServer() {
         // Aguardar JSON Server
         await waitForJSONServer();
         
-        // Inicializar cliente Evolution API
-        evolutionClient = new EvolutionClient();
-        console.log('✅ Cliente Evolution API inicializado');
+               // Inicializar cliente Evolution API
+               evolutionClient = new EvolutionClient();
+               console.log('✅ Cliente Evolution API inicializado');
+               
+               // Inicializar adapter de compatibilidade com wppconnect
+               clientAdapter = new ClientAdapter(evolutionClient);
+               console.log('✅ ClientAdapter inicializado (compatibilidade wppconnect)');
         
         // Com Evolution API, não precisamos registrar onMessage
         // As mensagens chegam via webhook
