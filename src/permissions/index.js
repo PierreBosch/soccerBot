@@ -24,7 +24,11 @@ const admins = process.env.ADMIN_NUMBERS
   ? process.env.ADMIN_NUMBERS.split(',').map(num => num.trim())
   : defaultAdmins;
 
-console.log('👥 Administradores configurados:', admins.length);
+console.log('👥 Administradores configurados:', {
+  count: admins.length,
+  source: process.env.ADMIN_NUMBERS ? 'ADMIN_NUMBERS env var' : 'defaultAdmins',
+  admins: admins
+});
 
 /**
  * Verifica se um número de telefone é administrador
@@ -51,6 +55,14 @@ function isAdmin(phoneId) {
     const normalizedAdmin = admin.replace(/@c\.us|@s\.whatsapp\.net|@lid|@g\.us/g, '');
     const match = normalizedPhone === normalizedAdmin || phoneId === admin;
     
+    console.log('🔍 Comparando:', {
+      phoneId,
+      normalizedPhone,
+      admin,
+      normalizedAdmin,
+      match
+    });
+    
     if (match) {
       console.log('✅ Admin encontrado:', { phoneId, admin });
     }
@@ -59,7 +71,11 @@ function isAdmin(phoneId) {
   });
   
   if (!isAdminUser) {
-    console.log('❌ Não é admin:', { phoneId, normalizedPhone });
+    console.log('❌ Não é admin:', { 
+      phoneId, 
+      normalizedPhone,
+      adminsChecked: admins.length 
+    });
   }
   
   return isAdminUser;

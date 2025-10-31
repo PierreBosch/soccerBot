@@ -1,0 +1,18 @@
+{
+  "event": "messages.upsert",
+  "instance": "ameixa-bot",
+  "data": {
+    "key": {
+      "remoteJid": "120363144278270676@g.us",
+      "fromMe": false,
+      "id": "3AA827C0E72883869F38",
+      "participant": "554896742125@s.whatsapp.net"
+    },
+    "pushName": "Pierre Boschetto",
+    "message": {
+      "conversation": "/serasa"
+    },
+    "messageType": "conversation",
+    "messageTimestamp": 1761870635
+  }
+}
