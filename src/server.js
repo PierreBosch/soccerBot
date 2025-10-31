@@ -68,18 +68,18 @@ async function processMessage(message, client) {
             const [command] = message.body.toLowerCase().split(' ');
             
             if (command.trim().startsWith('/')) {
-                const commands = require('./commands');
-                const executeCommand = commands.executeCommand || function(cmd, msg, cli) {
-                    // Fallback: importar e executar comando diretamente
-                    try {
-                        const commandModule = require(`./commands${cmd}`);
-                        return commandModule(msg, cli);
-                    } catch (err) {
-                        console.error(`Comando ${cmd} não encontrado:`, err.message);
-                    }
-                };
+                const commandsModule = require('./commands/index.js');
                 
-                await executeCommand(command, message, client);
+                // Usar a função executeCommand exportada pelo módulo
+                if (typeof commandsModule === 'function') {
+                    // Se exporta a função start, não usamos mais (webhook mode)
+                    console.log('⚠️ Modo legado detectado');
+                } else if (commandsModule.executeCommand) {
+                    // Usar executeCommand se existir
+                    await commandsModule.executeCommand(command, message, client);
+                } else {
+                    console.error(`❌ executeCommand não encontrado no módulo commands`);
+                }
             }
         }
     } catch (error) {
