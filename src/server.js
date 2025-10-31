@@ -70,15 +70,24 @@ async function processMessage(message, client) {
             const [command] = message.body.toLowerCase().split(' ');
             
             if (command.trim().startsWith('/')) {
+                console.log('🔍 Processando comando:', command);
+                
                 const commandsModule = require('./commands/index.js');
                 
-                // Usar a função executeCommand exportada pelo módulo
-                if (typeof commandsModule === 'function') {
-                    // Se exporta a função start, não usamos mais (webhook mode)
-                    console.log('⚠️ Modo legado detectado');
-                } else if (commandsModule.executeCommand) {
-                    // Usar executeCommand se existir
-                    await commandsModule.executeCommand(command, message, client);
+                // Verificar se executeCommand existe (prioridade)
+                if (commandsModule.executeCommand && typeof commandsModule.executeCommand === 'function') {
+                    console.log('✅ Executando comando via executeCommand');
+                    try {
+                        await commandsModule.executeCommand(command, message, client);
+                        console.log('✅ Comando executado com sucesso:', command);
+                    } catch (cmdError) {
+                        console.error('❌ Erro ao executar comando:', command, cmdError.message);
+                        // Enviar mensagem de erro ao usuário
+                        await client.sendText(message.from, `❌ Erro: ${cmdError.message}`);
+                    }
+                } else if (typeof commandsModule === 'function') {
+                    // Fallback para modo legado (não deve ser usado com webhooks)
+                    console.log('⚠️ Modo legado detectado - executeCommand não disponível');
                 } else {
                     console.error(`❌ executeCommand não encontrado no módulo commands`);
                 }
