@@ -5,15 +5,14 @@ WORKDIR /usr/src/app
 # Instalar json-server globalmente
 RUN npm install -g json-server@1.0.0-beta.1
 
-# Copiar arquivos necessários
-COPY init-db.sh ./
+# Criar db.json inicial
+RUN echo '{"players":[],"goalKeepers":[],"barbecueEaters":[],"debtors":[],"groups":[],"lists":[],"participants":[]}' > db.json
 
-# Dar permissão de execução ao script
-RUN chmod +x init-db.sh
+# Dar permissões corretas
+RUN chmod 666 db.json
 
 EXPOSE 3001
 
-# Executar script de inicialização e depois o json-server
-# --host 0.0.0.0 permite acesso de outros containers
-CMD ["sh", "-c", "./init-db.sh && json-server db.json --host 0.0.0.0 --port 3001"]
+# Iniciar json-server
+CMD ["json-server", "db.json", "--host", "0.0.0.0", "--port", "3001"]
 
