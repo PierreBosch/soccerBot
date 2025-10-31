@@ -28,6 +28,14 @@ async function sendPaymentMessages(message, client) {
     // Usar for...of ao invés de map para garantir execução sequencial
     for (let i = 0; i < billingPhones.length; i++) {
       const billing = billingPhones[i];
+      
+      // Validar se billing tem dados necessários
+      if (!billing || !billing.name || !billing.phone) {
+        console.error(`⚠️ Billing ${i + 1} sem dados:`, billing);
+        errors++;
+        continue;
+      }
+      
       const playerName = getPlayerName(billing.name, true);
       
       try {

@@ -51,6 +51,14 @@ async function notifyDebtors(message, client) {
     // Usar for...of ao invés de map para garantir execução sequencial
     for (let i = 0; i < debtors.length; i++) {
       const debtor = debtors[i];
+      
+      // Validar se player existe
+      if (!debtor.player || !debtor.player.name || !debtor.player.phoneNumber) {
+        console.error(`⚠️ Devedor ${i + 1} sem dados de player:`, debtor);
+        skipped++;
+        continue;
+      }
+      
       const playerName = getPlayerName(debtor.player.name, true);
       
       try {
