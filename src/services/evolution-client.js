@@ -42,14 +42,23 @@ class EvolutionClient {
   /**
    * Envia áudio em base64
    * @param {string} to - Número do destinatário
-   * @param {string} audioBase64 - Áudio em base64
+   * @param {string} audioBase64 - Áudio em base64 (com ou sem prefixo data:audio/...)
    */
   async sendAudio(to, audioBase64) {
     try {
-      const response = await this.client.post('/sendAudio/' + this.instanceName, {
+      // Remover prefixo data:audio/... se existir
+      const cleanBase64 = audioBase64.replace(/^data:audio\/[^;]+;base64,/, '');
+      
+      const response = await this.client.post('/sendWhatsAppAudio/' + this.instanceName, {
         number: to,
-        audio: audioBase64,
-        encoding: true // Indica que é base64
+        audioMessage: {
+          audio: cleanBase64
+        },
+        options: {
+          delay: 1000,
+          presence: 'recording',
+          encoding: true // Indica que é base64
+        }
       });
       
       console.log('✅ Áudio enviado:', { to });
@@ -63,14 +72,26 @@ class EvolutionClient {
   /**
    * Envia arquivo de áudio
    * @param {string} to - Número do destinatário
-   * @param {string} audioPath - Caminho do arquivo de áudio
+   * @param {string} audioPathOrBase64 - Caminho do arquivo de áudio OU base64 string
    */
-  async sendFile(to, audioPath, options = {}) {
+  async sendFile(to, audioPathOrBase64, options = {}) {
     try {
-      const fs = require('fs');
-      const audioBase64 = fs.readFileSync(audioPath, 'base64');
+      // Verificar se é base64 (começa com data:audio ou é uma string longa sem /)
+      const isBase64 = audioPathOrBase64.startsWith('data:audio') || 
+                       (!audioPathOrBase64.includes('/') && audioPathOrBase64.length > 100);
       
-      return await this.sendAudio(to, audioBase64);
+      if (isBase64) {
+        // Já é base64, enviar diretamente
+        console.log('📤 Enviando áudio em base64');
+        return await this.sendAudio(to, audioPathOrBase64);
+      } else {
+        // É caminho de arquivo, ler e converter
+        console.log('📤 Lendo arquivo de áudio:', audioPathOrBase64);
+        const fs = require('fs');
+        const audioBase64 = fs.readFileSync(audioPathOrBase64, 'base64');
+        
+        return await this.sendAudio(to, audioBase64);
+      }
     } catch (error) {
       console.error('❌ Erro ao enviar arquivo:', error.message);
       throw error;
