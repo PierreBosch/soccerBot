@@ -49,22 +49,26 @@ class EvolutionClient {
       // Remover prefixo data:audio/... se existir
       const cleanBase64 = audioBase64.replace(/^data:audio\/[^;]+;base64,/, '');
       
-      const response = await this.client.post('/sendWhatsAppAudio/' + this.instanceName, {
-        number: to,
-        audioMessage: {
-          audio: cleanBase64
-        },
-        options: {
-          delay: 1000,
-          presence: 'recording',
-          encoding: true // Indica que é base64
-        }
+      console.log('📤 Enviando áudio:', {
+        to,
+        base64Length: cleanBase64.length,
+        preview: cleanBase64.substring(0, 50) + '...'
       });
       
-      console.log('✅ Áudio enviado:', { to });
+      const response = await this.client.post('/sendWhatsAppAudio/' + this.instanceName, {
+        number: to,
+        audio: cleanBase64  // Formato correto: audio direto, não audioMessage
+      });
+      
+      console.log('✅ Áudio enviado com sucesso:', { to, response: response.data });
       return response.data;
     } catch (error) {
-      console.error('❌ Erro ao enviar áudio:', error.response?.data || error.message);
+      console.error('❌ Erro ao enviar áudio:', {
+        to,
+        error: error.response?.data || error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText
+      });
       throw error;
     }
   }
